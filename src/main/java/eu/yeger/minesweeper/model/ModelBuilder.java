@@ -1,4 +1,4 @@
-package eu.yeger.minesweeper;
+package eu.yeger.minesweeper.model;
 
 import eu.yeger.minesweeper.model.Cell;
 import eu.yeger.minesweeper.model.Game;
@@ -6,7 +6,7 @@ import eu.yeger.minesweeper.model.Game;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class GameBuilder {
+public class ModelBuilder {
 
     public Game buildGame(final int width,
                           final int height,
