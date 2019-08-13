@@ -4,6 +4,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class Game {
 
@@ -16,6 +17,11 @@ public class Game {
                 final int height) {
         this.width = width;
         this.height = height;
+    }
+
+    public Game withCells(final Collection<Cell> cells) {
+        cells.forEach(this::withCell);
+        return this;
     }
 
     public Game withCell(final Cell cell) {
