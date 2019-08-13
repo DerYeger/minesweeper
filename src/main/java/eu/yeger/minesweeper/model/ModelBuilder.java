@@ -15,7 +15,6 @@ public class ModelBuilder {
         this.width = width;
         this.height = height;
         this.bombCount = bombCount;
-        System.out.println(bombCount);
     }
 
     public Game buildGame() {
@@ -37,7 +36,9 @@ public class ModelBuilder {
         }
     }
 
-    private ArrayList<Cell> initNeighbors(final Cell[][] cells, final int x, final int y) {
+    private ArrayList<Cell> initNeighbors(final Cell[][] cells,
+                                          final int x,
+                                          final int y) {
         final ArrayList<Cell> neighbors = new ArrayList<>();
         neighbors.add(getCellAtCoordinates(cells,x - 1, y)); //left
         neighbors.add(getCellAtCoordinates(cells,x - 1, y - 1)); //top left
@@ -46,8 +47,10 @@ public class ModelBuilder {
         return neighbors;
     }
 
-    private Cell getCellAtCoordinates(final Cell[][] cells, final int x, final int y) {
-        if (x < 0 || y < 0|| cells[y].length <= x || cells.length <= y) return null; //out of bounds
+    private Cell getCellAtCoordinates(final Cell[][] cells,
+                                      final int x,
+                                      final int y) {
+        if (y < 0 || cells.length <= y || x < 0 || cells[y].length <= x) return null; //out of bounds
         return cells[y][x];
     }
 

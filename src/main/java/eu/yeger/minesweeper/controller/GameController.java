@@ -33,10 +33,8 @@ public class GameController {
         cell.unveiled.addListener((observableValue, oldValue, newValue) -> {
             if (!newValue) return;
             if (cell.bomb.get()) {
-                System.out.println("Lost");
                 game.state.set(Game.State.LOST);
             } else if (gameWon()) {
-                System.out.println("Won");
                 game.state.set(Game.State.WON);
             } else {
                 unveilNeighbors(cell);

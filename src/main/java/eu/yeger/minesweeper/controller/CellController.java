@@ -14,7 +14,8 @@ public class CellController {
     private final Cell cell;
     private final int cellSize;
 
-    public CellController(final Cell cell, final int cellSize) {
+    public CellController(final Cell cell,
+                          final int cellSize) {
         this.cell = cell;
         this.cellSize = cellSize;
     }
