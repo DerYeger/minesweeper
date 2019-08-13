@@ -17,22 +17,30 @@ public class Cell {
     public final BooleanProperty flag = new SimpleBooleanProperty(false);
     public final BooleanProperty unveiled = new SimpleBooleanProperty(false);
     public final IntegerProperty number = new SimpleIntegerProperty(0);
-    public final ArrayList<Cell> neighbors = new ArrayList<>();
 
+    private final ArrayList<Cell> neighbors = new ArrayList<>();
     private Game game;
 
-    public Cell(final int x, final int y) {
+    public Cell(final int x,
+                final int y) {
         this.x = x;
         this.y = y;
     }
 
+    public ArrayList<Cell> getNeighbors() {
+        return neighbors;
+    }
+
     public Cell withNeighbors(final Collection<Cell> neighbors) {
-        neighbors.forEach(this::withNeighbor);
+        neighbors
+                .stream()
+                .filter(Objects::nonNull)
+                .forEach(this::withNeighbor);
         return this;
     }
 
     public Cell withNeighbor(final Cell neighbor) {
-        if (neighbor == null) return this;
+        Objects.requireNonNull(neighbor);
         if (!neighbors.contains(neighbor)) {
             neighbors.add(neighbor);
             neighbor.doAddNeighbor(this);
@@ -41,7 +49,12 @@ public class Cell {
     }
 
     private void doAddNeighbor(final Cell neighbor) {
+        Objects.requireNonNull(neighbor);
         neighbors.add(neighbor);
+    }
+
+    public Game getGame() {
+        return game;
     }
 
     public Cell setGame(final Game game) {
@@ -53,13 +66,5 @@ public class Cell {
     void doSetGame(final Game game) {
         Objects.requireNonNull(game);
         this.game = game;
-    }
-
-    public Game getGame() {
-        return game;
-    }
-
-    public ArrayList<Cell> getNeighbors() {
-        return neighbors;
     }
 }

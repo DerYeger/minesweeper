@@ -25,6 +25,7 @@ public class Game {
     }
 
     public Game withCell(final Cell cell) {
+        if (cell == null) return this;
         if (!cells.contains(cell)) {
             cells.add(cell);
             cell.doSetGame(this);
