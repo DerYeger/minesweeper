@@ -34,10 +34,18 @@ public class Minesweeper {
     private Runnable onGameWon;
     private Runnable onGameLost;
 
+    private ModelBuilder modelBuilder;
+    private ViewBuilder viewBuilder ;
+
     public Node instance() {
-        final Game game = new ModelBuilder().buildGame(width, height, bombCount);
+        initCheck();
+        final Game game = modelBuilder.buildGame();
         new GameController(game, onGameWon, onGameLost);
-        return new ViewBuilder(style, cellSize)
-                .buildView(game);
+        return viewBuilder.buildView(game);
+    }
+
+    private void initCheck() {
+        if (modelBuilder == null) modelBuilder = new ModelBuilder(width, height, bombCount);
+        if (viewBuilder == null) viewBuilder = new ViewBuilder(style, cellSize);
     }
 }

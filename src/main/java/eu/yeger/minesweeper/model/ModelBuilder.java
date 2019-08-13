@@ -5,9 +5,20 @@ import java.util.Collections;
 
 public class ModelBuilder {
 
-    public Game buildGame(final int width,
-                          final int height,
-                          final int bombCount) {
+    private final int width;
+    private final int height;
+    private final int bombCount;
+
+    public ModelBuilder(final int width,
+                        final int height,
+                        final int bombCount) {
+        this.width = width;
+        this.height = height;
+        this.bombCount = bombCount;
+        System.out.println(bombCount);
+    }
+
+    public Game buildGame() {
         final Game game = new Game(width, height);
         initCells(game);
         initBombs(game, bombCount);

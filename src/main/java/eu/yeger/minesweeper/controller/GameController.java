@@ -2,7 +2,6 @@ package eu.yeger.minesweeper.controller;
 
 import eu.yeger.minesweeper.model.Cell;
 import eu.yeger.minesweeper.model.Game;
-import javafx.scene.layout.GridPane;
 
 public class GameController {
 
