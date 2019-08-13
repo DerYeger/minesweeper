@@ -46,5 +46,9 @@ Node view = minesweeper.instance();
 
 ## Release History
 
+- 0.2
+    - Removed unnecessary getter and setter methods
+    - Removed example
+    - Improved code quality
 - 0.1
     - WIP Alpha Release
