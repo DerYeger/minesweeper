@@ -3,6 +3,8 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.7'
 }
 
+apply plugin: 'jacoco'
+
 group 'eu.yeger'
 version '0.1'
 
@@ -33,4 +35,11 @@ dependencies {
     testCompile "org.testfx:openjfx-monocle:jdk-11+26"
 
     testImplementation "org.mockito:mockito-core:2.+"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled false
+    }
 }
