@@ -1,0 +1,29 @@
+* {
+    -fx-font-size: 18;
+    -fx-font-weight: BOLD;
+}
+
+.container {
+    -fx-fill: BLACK;
+}
+
+.container Line {
+    -fx-stroke: #212121;
+}
+
+.cell {
+    -fx-background-color: #424242;
+}
+
+.bomb,
+.flag {
+    -fx-text-fill: #cf6679;
+}
+
+.number {
+    -fx-text-fill: #03dac5;
+}
+
+.blocker {
+    -fx-fill: #212121;
+}
