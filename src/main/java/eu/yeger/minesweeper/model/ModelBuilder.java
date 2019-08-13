@@ -1,8 +1,5 @@
 package eu.yeger.minesweeper.model;
 
-import eu.yeger.minesweeper.model.Cell;
-import eu.yeger.minesweeper.model.Game;
-
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -22,7 +19,7 @@ public class ModelBuilder {
         final Cell[][] cells = new Cell[game.height][game.width];
         for (int y = 0; y < game.height; y++) {
             for (int x = 0; x < game.width; x++) {
-                cells[y][x] = new Cell()
+                cells[y][x] = new Cell(x, y)
                         .setGame(game)
                         .withNeighbors(initNeighbors(cells, x, y));
             }
@@ -39,7 +36,7 @@ public class ModelBuilder {
     }
 
     private Cell getCellAtCoordinates(final Cell[][] cells, final int x, final int y) {
-        if (x < 0 || cells[y].length <= x || y < 0|| cells.length <= y) return null; //out of bounds
+        if (x < 0 || y < 0|| cells[y].length <= x || cells.length <= y) return null; //out of bounds
         return cells[y][x];
     }
 
