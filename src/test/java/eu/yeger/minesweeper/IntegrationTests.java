@@ -2,7 +2,7 @@ package eu.yeger.minesweeper;
 
 import eu.yeger.minesweeper.model.Cell;
 import eu.yeger.minesweeper.model.Game;
-import eu.yeger.minesweeper.model.ModelBuilder;
+import eu.yeger.minesweeper.model.DefaultModelBuilder;
 import javafx.application.Platform;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -31,7 +31,9 @@ public class IntegrationTests extends ApplicationTest {
         lost = false;
     }
 
-    private void click(final int x, final int y, final MouseButton button) {
+    private void click(final int x,
+                       final int y,
+                       final MouseButton button) {
         clickOn(stage.getX() + x, stage.getY() + y, button);
     }
 
@@ -117,15 +119,15 @@ public class IntegrationTests extends ApplicationTest {
 
     @Test
     public void testUnveiling() {
-        final ModelBuilder modelBuilder = mock(ModelBuilder.class);
-        when(modelBuilder.buildGame()).thenReturn(buildTestGameAlpha());
+        final DefaultModelBuilder modelBuilder = mock(DefaultModelBuilder.class);
+        when(modelBuilder.build()).thenReturn(buildTestGameAlpha());
         final Minesweeper minesweeper = Minesweeper
                 .builder()
                 .cellSize(30)
                 .onGameWon(() -> won = true)
                 .onGameLost(() -> lost = true)
+                .modelBuilder(modelBuilder)
                 .build();
-        minesweeper.setModelBuilder(modelBuilder);
         setScene(new Scene((Parent) minesweeper.instance()));
         click(15, 15, MouseButton.PRIMARY);
         WaitForAsyncUtils.waitForFxEvents();
@@ -135,15 +137,15 @@ public class IntegrationTests extends ApplicationTest {
 
     @Test
     public void testUnveilingBlocked() {
-        final ModelBuilder modelBuilder = mock(ModelBuilder.class);
-        when(modelBuilder.buildGame()).thenReturn(buildTestGameBeta());
+        final DefaultModelBuilder modelBuilder = mock(DefaultModelBuilder.class);
+        when(modelBuilder.build()).thenReturn(buildTestGameBeta());
         final Minesweeper minesweeper = Minesweeper
                 .builder()
                 .cellSize(30)
                 .onGameWon(() -> won = true)
                 .onGameLost(() -> lost = true)
+                .modelBuilder(modelBuilder)
                 .build();
-        minesweeper.setModelBuilder(modelBuilder);
         setScene(new Scene((Parent) minesweeper.instance()));
         click(15, 15, MouseButton.PRIMARY);
         WaitForAsyncUtils.waitForFxEvents();
