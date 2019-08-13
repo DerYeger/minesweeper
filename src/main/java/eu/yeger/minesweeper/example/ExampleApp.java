@@ -23,6 +23,7 @@ public class ExampleApp extends Application {
                 .width(16)
                 .height(9)
                 .bombCount(15)
+                .cellSize(40)
                 .onGameWon(() -> showNewGameDialog("Game won!"))
                 .onGameLost(() -> showNewGameDialog("Game lost!"))
                 .build();
