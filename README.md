@@ -22,6 +22,7 @@ allprojects {
 and
 ```
 dependencies {
+    ...
     implementation 'com.github.deryeger:minesweeper:0.1'
 }
 ```
