@@ -7,3 +7,43 @@
 Minesweeper provides an implementation of the classic game with customizable graphics and game settings.
 
 ![](pictures/minesweeper.png)
+
+## Gradle
+
+In your build.gradle add
+```
+allprojects {
+    repositories {
+        ...
+        maven { url 'https://jitpack.io' }
+    }
+}
+```
+and
+```
+dependencies {
+    implementation 'com.github.deryeger:minesweeper:0.1'
+}
+```
+
+## Usage
+
+With the builder you can quickly create Minesweeper configurations. Every time Minesweeper::instance is called a new game istance using the previously set configuration is created.
+```
+Minesweeper minesweeper = Minesweeper
+                .builder()
+                .width(20)
+                .height(10)
+                .bombCount(40)
+                .cellSize(30)
+                .onGameWon(() -> someMethod())
+                .onGameLost(() -> someOtherMethod())
+                .build();
+
+Node view = minesweeper.instance();
+```
+
+## Release History
+
+- 0.1
+    - WIP Alpha Release
