@@ -15,12 +15,9 @@
     -fx-background-color: #424242;
 }
 
-.bomb {
-    -fx-text-fill: #cf6679;
-}
-
+.bomb,
 .flag {
-    -fx-text-fill: #03dac5;
+    -fx-text-fill: #cf6679;
 }
 
 .number {
