@@ -11,6 +11,8 @@ import java.util.Objects;
 
 public class Cell {
 
+    public final int x;
+    public final int y;
     public final BooleanProperty bomb = new SimpleBooleanProperty(false);
     public final BooleanProperty flag = new SimpleBooleanProperty(false);
     public final BooleanProperty unveiled = new SimpleBooleanProperty(false);
@@ -19,14 +21,18 @@ public class Cell {
 
     private Game game;
 
+    public Cell(final int x, final int y) {
+        this.x = x;
+        this.y = y;
+    }
+
     public Cell withNeighbors(final Collection<Cell> neighbors) {
-        Objects.requireNonNull(neighbors);
         neighbors.forEach(this::withNeighbor);
         return this;
     }
 
     public Cell withNeighbor(final Cell neighbor) {
-        Objects.requireNonNull(neighbor);
+        if (neighbor == null) return this;
         if (!neighbors.contains(neighbor)) {
             neighbors.add(neighbor);
             neighbor.doAddNeighbor(this);
@@ -35,7 +41,6 @@ public class Cell {
     }
 
     private void doAddNeighbor(final Cell neighbor) {
-        Objects.requireNonNull(neighbor);
         neighbors.add(neighbor);
     }
 
@@ -55,6 +60,6 @@ public class Cell {
     }
 
     public ArrayList<Cell> getNeighbors() {
-        return null;
+        return neighbors;
     }
 }
