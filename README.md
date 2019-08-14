@@ -55,3 +55,8 @@ Node view = minesweeper.instance();
     - Improved code quality
 - 0.1
     - WIP Alpha Release
+
+## Licenses
+
+- Flying flag icon by [Lorc](http://lorcblog.blogspot.com/) under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/)
+- Unlit bomb icon by [Lorc](http://lorcblog.blogspot.com/) under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/)

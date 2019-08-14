@@ -33,6 +33,4 @@ public class ViewBuilder {
         gridPane.getStylesheets().add(style);
         return gridPane;
     }
-
-
 }
