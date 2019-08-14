@@ -30,9 +30,9 @@ public class CellController {
         if (cell.bomb.get()) {
             stateLabel.setText("B");
             stateLabel.getStyleClass().add("bomb");
-        } else if (cell.number.get() > 0) {
+        } else {
             stateLabel.setText(Integer.toString(cell.number.get()));
-            stateLabel.getStyleClass().add("number");
+            stateLabel.getStyleClass().addAll("number", asWord(cell.number.get()));
         }
         cellContainer.getChildren().add(stateLabel);
 
@@ -63,6 +63,31 @@ public class CellController {
             }
         } else if (event.getButton() == MouseButton.SECONDARY) { //toggle flag
             cell.flag.set(!cell.flag.get());
+        }
+    }
+
+    private String asWord(final int number) {
+        switch (number) {
+            case 0:
+                return "zero";
+            case 1:
+                return "one";
+            case 2:
+                return "two";
+            case 3:
+                return "three";
+            case 4:
+                return "four";
+            case 5:
+                return "five";
+            case 6:
+                return "six";
+            case 7:
+                return "seven";
+            case 8:
+                return "eight";
+            default:
+                return null;
         }
     }
 }
