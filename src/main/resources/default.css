@@ -27,7 +27,7 @@
 .number {
     -fx-font-size: 18;
     -fx-font-weight: BOLD;
-    -fx-opacity: 0.6;
+    -fx-opacity: 0.8;
 }
 
 .zero {
