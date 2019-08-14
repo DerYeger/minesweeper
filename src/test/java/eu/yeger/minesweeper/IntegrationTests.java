@@ -77,6 +77,15 @@ public class IntegrationTests extends ApplicationTest {
         return game;
     }
 
+    private Game buildTestGameGamma() {
+        final Game game = new Game(10, 1);
+        for (int i = 0; i <= 9; i++) {
+            final Cell cell = new Cell(i, 0);
+            cell.setGame(game).number.set(i);
+        }
+        return game;
+    }
+
     @Test
     public void testWin() {
         final Minesweeper minesweeper = Minesweeper
@@ -151,5 +160,36 @@ public class IntegrationTests extends ApplicationTest {
         WaitForAsyncUtils.waitForFxEvents();
         assertFalse(won);
         assertFalse(lost);
+    }
+
+    @Test
+    public void testNumbers() {
+        final DefaultModelBuilder modelBuilder = mock(DefaultModelBuilder.class);
+        when(modelBuilder.build()).thenReturn(buildTestGameGamma());
+        final Minesweeper minesweeper = Minesweeper
+                .builder()
+                .cellSize(30)
+                .onGameWon(() -> won = true)
+                .onGameLost(() -> lost = true)
+                .modelBuilder(modelBuilder)
+                .build();
+        setScene(new Scene((Parent) minesweeper.instance()));
+        for (int i = 0; i <= 9; i++) {
+            assertFalse(won);
+            click(15 + 30 * i, 15, MouseButton.PRIMARY);
+        }
+        WaitForAsyncUtils.waitForFxEvents();
+        assertTrue(won);
+        assertFalse(lost);
+        assertNotNull(lookup("#zero"));
+        assertNotNull(lookup("#one"));
+        assertNotNull(lookup("#two"));
+        assertNotNull(lookup("#three"));
+        assertNotNull(lookup("#four"));
+        assertNotNull(lookup("#five"));
+        assertNotNull(lookup("#six"));
+        assertNotNull(lookup("#seven"));
+        assertNotNull(lookup("#eight"));
+        assertNotNull(lookup("#null"));
     }
 }
