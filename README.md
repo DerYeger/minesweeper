@@ -32,7 +32,7 @@ dependencies {
 
 ## Usage
 
-With the builder you can quickly create Minesweeper configurations. Every time Minesweeper::instance is called a new game istance using the previously set configuration is created.
+With the builder you can quickly create Minesweeper configurations. Every time Minesweeper::instance is called a new game instance using the previously set configuration is created.
 ```
 Minesweeper minesweeper = Minesweeper
                 .builder()
