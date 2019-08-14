@@ -15,15 +15,53 @@
     -fx-background-color: #424242;
 }
 
+.blocker {
+    -fx-fill: #212121;
+}
+
 .bomb,
 .flag {
     -fx-text-fill: #cf6679;
 }
 
 .number {
-    -fx-text-fill: #03dac5;
+    -fx-font-size: 18;
+    -fx-font-weight: BOLD;
+    -fx-opacity: 0.6;
 }
 
-.blocker {
-    -fx-fill: #212121;
+.zero {
+    -fx-opacity: 0;
+}
+
+.one {
+    -fx-text-fill: BLUE;
+}
+
+.two {
+    -fx-text-fill: GREEN;
+}
+
+.three {
+    -fx-text-fill: RED;
+}
+
+.four {
+    -fx-text-fill: DARKBLUE;
+}
+
+.five {
+    -fx-text-fill: BROWN;
+}
+
+.six {
+    -fx-text-fill: CYAN;
+}
+
+.seven {
+    -fx-text-fill: BLACK;
+}
+
+.eight {
+    -fx-text-fill: DARKGREY;
 }
