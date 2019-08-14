@@ -21,6 +21,8 @@ public class Minesweeper {
     private int cellSize = 40;
     @Builder.Default
     private String style = "/default.css";
+    @Builder.Default
+    private String flagImage = "/flag.png";
 
     private Runnable onGameWon;
     private Runnable onGameLost;
@@ -37,6 +39,6 @@ public class Minesweeper {
 
     private void defaultBuilderFallback() {
         if (modelBuilder == null) modelBuilder = new DefaultModelBuilder(width, height, bombCount);
-        if (viewBuilder == null) viewBuilder = new ViewBuilder(style, cellSize);
+        if (viewBuilder == null) viewBuilder = new ViewBuilder(style, cellSize, flagImage);
     }
 }

@@ -4,6 +4,8 @@ import eu.yeger.minesweeper.model.Cell;
 import eu.yeger.minesweeper.model.Game;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
@@ -14,10 +16,14 @@ public class CellController {
     private final Cell cell;
     private final int cellSize;
 
+    private Image flagImage;
+
     public CellController(final Cell cell,
-                          final int cellSize) {
+                          final int cellSize,
+                          final Image flagImage) {
         this.cell = cell;
         this.cellSize = cellSize;
+        this.flagImage = flagImage;
     }
 
     public Node initialize() {
@@ -44,12 +50,14 @@ public class CellController {
         cellContainer.getChildren().add(rectangle);
         rectangle.setOnMouseClicked(event -> handleClick(cell, event));
 
-        final Label flagLabel = new Label();
-        flagLabel.visibleProperty().bindBidirectional(cell.flag);
-        flagLabel.setText("F");
-        flagLabel.getStyleClass().add("flag");
-        flagLabel.setOnMouseClicked(event -> handleClick(cell, event));
-        cellContainer.getChildren().add(flagLabel);
+        final ImageView flag = new ImageView();
+        flag.setImage(flagImage);
+        flag.visibleProperty().bindBidirectional(cell.flag);
+        flag.getStyleClass().add("flag");
+        flag.setOnMouseClicked(event -> handleClick(cell, event));
+        flag.setFitWidth(cellSize);
+        flag.setFitHeight(cellSize);
+        cellContainer.getChildren().add(flag);
 
         return cellContainer;
     }
