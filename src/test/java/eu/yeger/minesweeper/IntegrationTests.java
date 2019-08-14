@@ -96,6 +96,9 @@ public class IntegrationTests extends ApplicationTest {
                 .cellSize(30)
                 .onGameWon(() -> won = true)
                 .onGameLost(() -> lost = true)
+                .modelBuilder(null)
+                .viewBuilder(null)
+                .style("/default.css")
                 .build();
         setScene(new Scene((Parent) minesweeper.instance()));
         click(15, 15, MouseButton.PRIMARY);
