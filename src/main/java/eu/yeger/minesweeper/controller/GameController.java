@@ -5,7 +5,7 @@ import eu.yeger.minesweeper.model.Game;
 
 public class GameController {
 
-    public final Game game;
+    private final Game game;
     private final Runnable onGameWon;
     private final Runnable onGameLost;
 
