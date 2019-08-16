@@ -10,19 +10,16 @@ import javafx.scene.layout.GridPane;
 
 public class ViewBuilder {
 
-    private final String style;
     private final int cellSize;
     private final Image flagIcon;
     private final Image mineIcon;
 
-    public ViewBuilder(final String style,
-                       final int cellSize,
-                       final String flagIcon,
-                       final String mineIcon) {
-        this.style = style;
+    public ViewBuilder(final int cellSize,
+                       final Image flagIcon,
+                       final Image mineIcon) {
         this.cellSize = cellSize;
-        this.flagIcon = new Image(flagIcon, cellSize, cellSize, true, true);
-        this.mineIcon = new Image(mineIcon, cellSize, cellSize, true, true);
+        this.flagIcon = flagIcon;
+        this.mineIcon = mineIcon;
     }
 
     public GridPane buildView(final Game game) {
@@ -33,7 +30,7 @@ public class ViewBuilder {
             final Node cellNode = cellController.initialize();
             gridPane.add(cellNode, cell.x, cell.y);
         }
-        gridPane.getStylesheets().add(style);
+        gridPane.getStylesheets().add("/default.css");
         gridPane.setAlignment(Pos.CENTER);
         return gridPane;
     }
