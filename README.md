@@ -38,7 +38,7 @@ Minesweeper minesweeper = Minesweeper
                 .builder()
                 .width(20)
                 .height(10)
-                .bombCount(40)
+                .mineCount(40)
                 .cellSize(30)
                 .onGameWon(() -> someMethod())
                 .onGameLost(() -> someOtherMethod())
