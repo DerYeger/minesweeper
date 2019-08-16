@@ -3,12 +3,12 @@
 }
 
 .cell {
-    -fx-background-color: #121212, #212121;
+    -fx-background-color: #212121, #424242;
     -fx-background-insets: 0, 1;
 }
 
 .blocker {
-    -fx-fill: #121212;
+    -fx-fill: #212121;
 }
 
 .bomb,
@@ -19,7 +19,6 @@
 .number {
     -fx-font-size: 22;
     -fx-font-weight: BOLD;
-    -fx-opacity: 0.9;
 }
 
 .zero {
@@ -27,7 +26,7 @@
 }
 
 .one {
-    -fx-text-fill: BLUE;
+    -fx-text-fill: TURQUOISE;
 }
 
 .two {
@@ -40,7 +39,7 @@
 }
 
 .four {
-    -fx-text-fill: CYAN;
+    -fx-text-fill: PINK;
 }
 
 .five {
@@ -52,9 +51,9 @@
 }
 
 .seven {
-    -fx-text-fill: LIGHTGREY;
+    -fx-text-fill: DARKGREY;
 }
 
 .eight {
-    -fx-text-fill: DARKGREY;
+    -fx-text-fill: LIGHTGREY;
 }
