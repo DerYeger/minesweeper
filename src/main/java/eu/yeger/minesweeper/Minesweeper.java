@@ -23,6 +23,8 @@ public class Minesweeper {
     private String style = "/default.css";
     @Builder.Default
     private String flagImage = "/flag.png";
+    @Builder.Default
+    private String bombImage = "/bomb.png";
 
     private Runnable onGameWon;
     private Runnable onGameLost;
@@ -39,6 +41,6 @@ public class Minesweeper {
 
     private void defaultBuilderFallback() {
         if (modelBuilder == null) modelBuilder = new DefaultModelBuilder(width, height, bombCount);
-        if (viewBuilder == null) viewBuilder = new ViewBuilder(style, cellSize, flagImage);
+        if (viewBuilder == null) viewBuilder = new ViewBuilder(style, cellSize, flagImage, bombImage);
     }
 }
