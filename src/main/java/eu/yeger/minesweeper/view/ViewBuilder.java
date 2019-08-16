@@ -3,6 +3,7 @@ package eu.yeger.minesweeper.view;
 import eu.yeger.minesweeper.controller.CellController;
 import eu.yeger.minesweeper.model.Cell;
 import eu.yeger.minesweeper.model.Game;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
@@ -34,6 +35,7 @@ public class ViewBuilder {
         }
         gridPane.setGridLinesVisible(true);
         gridPane.getStylesheets().add(style);
+        gridPane.setAlignment(Pos.CENTER);
         return gridPane;
     }
 }
