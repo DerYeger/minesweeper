@@ -52,6 +52,9 @@ Node view = minesweeper.instance();
 - 0.3
     - Added style classes to numbers
     - Added flag and mine icons
+    - Icons are now passed as Images to the builder
+    - The builder does no longer supports setting styles
+        - Styles can be applied to the output Node instead
 - 0.2
     - Removed unnecessary getter and setter methods
     - Removed example
