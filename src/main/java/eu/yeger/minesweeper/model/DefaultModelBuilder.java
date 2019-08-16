@@ -61,7 +61,7 @@ public class DefaultModelBuilder implements ModelBuilder {
         cells
                 .stream()
                 .limit(bombCount)
-                .forEach(cell -> cell.bomb.set(true));
+                .forEach(cell -> cell.mine.set(true));
     }
 
     private void initNumbers(final Game game) {
@@ -74,7 +74,7 @@ public class DefaultModelBuilder implements ModelBuilder {
         return (int) cell
                 .getNeighbors()
                 .stream()
-                .filter(c -> c.bomb.get())
+                .filter(c -> c.mine.get())
                 .count();
     }
 }

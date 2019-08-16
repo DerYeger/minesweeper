@@ -12,24 +12,24 @@ public class ViewBuilder {
 
     private final String style;
     private final int cellSize;
-    private final Image flagImage;
-    private final Image bombImage;
+    private final Image flagIcon;
+    private final Image mineIcon;
 
     public ViewBuilder(final String style,
                        final int cellSize,
-                       final String flagImage,
-                       final String bombImage) {
+                       final String flagIcon,
+                       final String mineIcon) {
         this.style = style;
         this.cellSize = cellSize;
-        this.flagImage = new Image(flagImage);
-        this.bombImage = new Image(bombImage);
+        this.flagIcon = new Image(flagIcon);
+        this.mineIcon = new Image(mineIcon);
     }
 
     public GridPane buildView(final Game game) {
         final GridPane gridPane = new GridPane();
         gridPane.getStyleClass().add("container");
         for (final Cell cell : game.cells) {
-            final CellController cellController = new CellController(cell, cellSize, flagImage, bombImage);
+            final CellController cellController = new CellController(cell, cellSize, flagIcon, mineIcon);
             final Node cellNode = cellController.initialize();
             gridPane.add(cellNode, cell.x, cell.y);
         }

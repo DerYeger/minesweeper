@@ -16,17 +16,17 @@ public class CellController {
     private final Cell cell;
     private final int cellSize;
 
-    private Image flagImage;
-    private Image bombImage;
+    private Image flagIcon;
+    private Image mineIcon;
 
     public CellController(final Cell cell,
                           final int cellSize,
-                          final Image flagImage,
-                          final Image bombImage) {
+                          final Image flagIcon,
+                          final Image mineIcon) {
         this.cell = cell;
         this.cellSize = cellSize;
-        this.flagImage = flagImage;
-        this.bombImage = bombImage;
+        this.flagIcon = flagIcon;
+        this.mineIcon = mineIcon;
     }
 
     public Node initialize() {
@@ -35,14 +35,14 @@ public class CellController {
         cellContainer.setMaxWidth(cellSize);
         cellContainer.setMaxHeight(cellSize);
 
-        if (cell.bomb.get()) {
-            final ImageView bomb = new ImageView();
-            bomb.setImage(bombImage);
-            bomb.visibleProperty().bindBidirectional(cell.unveiled);
-            bomb.getStyleClass().add("bomb");
-            bomb.setFitWidth(cellSize);
-            bomb.setFitHeight(cellSize);
-            cellContainer.getChildren().add(bomb);
+        if (cell.mine.get()) {
+            final ImageView mine = new ImageView();
+            mine.setImage(mineIcon);
+            mine.visibleProperty().bindBidirectional(cell.unveiled);
+            mine.getStyleClass().add("mine");
+            mine.setFitWidth(cellSize);
+            mine.setFitHeight(cellSize);
+            cellContainer.getChildren().add(mine);
         } else {
             final Label number = new Label();
             number.setText(Integer.toString(cell.number.get()));
@@ -60,7 +60,7 @@ public class CellController {
         rectangle.setOnMouseClicked(event -> handleClick(cell, event));
 
         final ImageView flag = new ImageView();
-        flag.setImage(flagImage);
+        flag.setImage(flagIcon);
         flag.visibleProperty().bindBidirectional(cell.flag);
         flag.getStyleClass().add("flag");
         flag.setOnMouseClicked(event -> handleClick(cell, event));

@@ -13,7 +13,7 @@ public class Cell {
 
     public final int x;
     public final int y;
-    public final BooleanProperty bomb = new SimpleBooleanProperty(false);
+    public final BooleanProperty mine = new SimpleBooleanProperty(false);
     public final BooleanProperty flag = new SimpleBooleanProperty(false);
     public final BooleanProperty unveiled = new SimpleBooleanProperty(false);
     public final IntegerProperty number = new SimpleIntegerProperty(0);

@@ -32,7 +32,7 @@ public class GameController {
     private void addCellListener(final Cell cell) {
         cell.unveiled.addListener((observableValue, oldValue, newValue) -> {
             if (!newValue) return;
-            if (cell.bomb.get()) {
+            if (cell.mine.get()) {
                 game.state.set(Game.State.LOST);
             } else if (gameWon()) {
                 game.state.set(Game.State.WON);
@@ -44,7 +44,7 @@ public class GameController {
 
     private void unveilNeighbors(final Cell cell) {
         cell.getNeighbors().forEach(neighbor -> {
-            if (!neighbor.bomb.get()
+            if (!neighbor.mine.get()
                     && !neighbor.flag.get()
                     && !neighbor.unveiled.get()
                     && (neighbor.number.get() == 0 || cell.number.get() == 0)) {
@@ -57,6 +57,6 @@ public class GameController {
         return game
                 .cells
                 .stream()
-                .allMatch(cell -> cell.bomb.get() ^ cell.unveiled.get());
+                .allMatch(cell -> cell.mine.get() ^ cell.unveiled.get());
     }
 }

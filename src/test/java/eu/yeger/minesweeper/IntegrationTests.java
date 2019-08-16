@@ -55,7 +55,7 @@ public class IntegrationTests extends ApplicationTest {
         final Cell br = new Cell(1, 1);
         tl.withNeighbors(Arrays.asList(tr, bl, br));
         game.withCells(Arrays.asList(tl, tr, bl, br));
-        br.bomb.set(true);
+        br.mine.set(true);
 
         return game;
     }
@@ -72,7 +72,7 @@ public class IntegrationTests extends ApplicationTest {
         br.number.set(1);
         tl.withNeighbors(Arrays.asList(tr, bl, br));
         game.withCells(Arrays.asList(tl, tr, bl, br));
-        br.bomb.set(true);
+        br.mine.set(true);
 
         return game;
     }
@@ -92,7 +92,7 @@ public class IntegrationTests extends ApplicationTest {
                 .builder()
                 .width(2)
                 .height(2)
-                .bombCount(0)
+                .mineCount(0)
                 .cellSize(30)
                 .onGameWon(() -> won = true)
                 .onGameLost(() -> lost = true)
@@ -113,7 +113,7 @@ public class IntegrationTests extends ApplicationTest {
                 .builder()
                 .width(1)
                 .height(1)
-                .bombCount(1)
+                .mineCount(1)
                 .cellSize(20)
                 .onGameWon(() -> won = true)
                 .onGameLost(() -> lost = true)

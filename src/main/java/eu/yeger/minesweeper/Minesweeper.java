@@ -16,15 +16,15 @@ public class Minesweeper {
     @Builder.Default
     private int height = 10;
     @Builder.Default
-    private int bombCount = 20;
+    private int mineCount = 20;
     @Builder.Default
     private int cellSize = 40;
     @Builder.Default
     private String style = "/default.css";
     @Builder.Default
-    private String flagImage = "/flag.png";
+    private String flagIcon = "/flag.png";
     @Builder.Default
-    private String bombImage = "/bomb.png";
+    private String mineIcon = "/bomb.png";
 
     private Runnable onGameWon;
     private Runnable onGameLost;
@@ -40,7 +40,7 @@ public class Minesweeper {
     }
 
     private void defaultBuilderFallback() {
-        if (modelBuilder == null) modelBuilder = new DefaultModelBuilder(width, height, bombCount);
-        if (viewBuilder == null) viewBuilder = new ViewBuilder(style, cellSize, flagImage, bombImage);
+        if (modelBuilder == null) modelBuilder = new DefaultModelBuilder(width, height, mineCount);
+        if (viewBuilder == null) viewBuilder = new ViewBuilder(style, cellSize, flagIcon, mineIcon);
     }
 }
