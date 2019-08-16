@@ -42,7 +42,7 @@ public class Minesweeper {
         if (flagIcon == null)
             flagIcon = new Image("/flag.png", cellSize, cellSize, true, true);
         if (mineIcon == null)
-            mineIcon = new Image("/flag.png", cellSize, cellSize, true, true);
+            mineIcon = new Image("/mine.png", cellSize, cellSize, true, true);
     }
 
     private void defaultBuilderFallback() {
