@@ -26,13 +26,13 @@ and
 ```
 dependencies {
     ...
-    implementation 'com.github.deryeger:minesweeper:0.2'
+    implementation 'com.github.deryeger:minesweeper:0.3'
 }
 ```
 
 ## Usage
 
-With the builder you can quickly create Minesweeper configurations. Every time Minesweeper::instance is called a new game instance using the previously set configuration is created.
+With the builder you can quickly create Minesweeper configurations, which in return provide game instances in form of Node objects.
 ```
 Minesweeper minesweeper = Minesweeper
                 .builder()
@@ -49,6 +49,9 @@ Node view = minesweeper.instance();
 
 ## Release History
 
+- 0.3
+    - Added style classes to numbers
+    - Added flag and mine icons
 - 0.2
     - Removed unnecessary getter and setter methods
     - Removed example
