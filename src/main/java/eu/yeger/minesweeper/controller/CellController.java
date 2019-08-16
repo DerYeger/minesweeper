@@ -17,13 +17,16 @@ public class CellController {
     private final int cellSize;
 
     private Image flagImage;
+    private Image bombImage;
 
     public CellController(final Cell cell,
                           final int cellSize,
-                          final Image flagImage) {
+                          final Image flagImage,
+                          final Image bombImage) {
         this.cell = cell;
         this.cellSize = cellSize;
         this.flagImage = flagImage;
+        this.bombImage = bombImage;
     }
 
     public Node initialize() {
@@ -32,15 +35,21 @@ public class CellController {
         cellContainer.setMaxWidth(cellSize);
         cellContainer.setMaxHeight(cellSize);
 
-        final Label stateLabel = new Label();
         if (cell.bomb.get()) {
-            stateLabel.setText("B");
-            stateLabel.getStyleClass().add("bomb");
+            final ImageView bomb = new ImageView();
+            bomb.setImage(bombImage);
+            bomb.visibleProperty().bindBidirectional(cell.unveiled);
+            bomb.getStyleClass().add("bomb");
+            bomb.setFitWidth(cellSize);
+            bomb.setFitHeight(cellSize);
+            cellContainer.getChildren().add(bomb);
         } else {
-            stateLabel.setText(Integer.toString(cell.number.get()));
-            stateLabel.getStyleClass().addAll("number", asWord(cell.number.get()));
+            final Label number = new Label();
+            number.setText(Integer.toString(cell.number.get()));
+            number.visibleProperty().bindBidirectional(cell.unveiled);
+            number.getStyleClass().addAll("number", asWord(cell.number.get()));
+            cellContainer.getChildren().add(number);
         }
-        cellContainer.getChildren().add(stateLabel);
 
         final Rectangle rectangle = new Rectangle();
         rectangle.visibleProperty().bind(cell.unveiled.not());
