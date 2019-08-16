@@ -21,8 +21,8 @@ public class ViewBuilder {
                        final String mineIcon) {
         this.style = style;
         this.cellSize = cellSize;
-        this.flagIcon = new Image(flagIcon);
-        this.mineIcon = new Image(mineIcon);
+        this.flagIcon = new Image(flagIcon, cellSize, cellSize, true, true);
+        this.mineIcon = new Image(mineIcon, cellSize, cellSize, true, true);
     }
 
     public GridPane buildView(final Game game) {
@@ -33,7 +33,6 @@ public class ViewBuilder {
             final Node cellNode = cellController.initialize();
             gridPane.add(cellNode, cell.x, cell.y);
         }
-        gridPane.setGridLinesVisible(true);
         gridPane.getStylesheets().add(style);
         gridPane.setAlignment(Pos.CENTER);
         return gridPane;
