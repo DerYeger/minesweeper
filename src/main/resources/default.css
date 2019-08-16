@@ -2,28 +2,24 @@
     -fx-alignment: CENTER;
 }
 
-.container Line {
-    -fx-stroke: #212121;
-}
-
 .cell {
-    -fx-background-color: #424242;
+    -fx-background-color: #121212, #212121;
+    -fx-background-insets: 0, 1;
 }
 
 .blocker {
-    -fx-fill: #212121;
+    -fx-fill: #121212;
 }
 
 .bomb,
 .flag {
     -fx-opacity: 0.8;
-    -fx-text-fill: #cf6679;
 }
 
 .number {
-    -fx-font-size: 18;
+    -fx-font-size: 22;
     -fx-font-weight: BOLD;
-    -fx-opacity: 0.8;
+    -fx-opacity: 0.9;
 }
 
 .zero {
@@ -40,10 +36,11 @@
 
 .three {
     -fx-text-fill: RED;
+    -fx-opacity: 0.8;
 }
 
 .four {
-    -fx-text-fill: DARKBLUE;
+    -fx-text-fill: CYAN;
 }
 
 .five {
@@ -55,7 +52,7 @@
 }
 
 .seven {
-    -fx-text-fill: BLACK;
+    -fx-text-fill: LIGHTGREY;
 }
 
 .eight {
