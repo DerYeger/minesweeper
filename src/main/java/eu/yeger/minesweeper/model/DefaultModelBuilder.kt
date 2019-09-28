@@ -1,7 +1,5 @@
 package eu.yeger.minesweeper.model
 
-import java.util.ArrayList
-
 class DefaultModelBuilder(private val width: Int,
                           private val height: Int,
                           private val bombCount: Int) : ModelBuilder {

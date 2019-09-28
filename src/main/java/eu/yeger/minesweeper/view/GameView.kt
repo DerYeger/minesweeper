@@ -1,6 +1,5 @@
 package eu.yeger.minesweeper.view
 
-import eu.yeger.kotlin.javafx.Fragment
 import eu.yeger.kotlin.javafx.child
 import eu.yeger.kotlin.javafx.gridPane
 import eu.yeger.minesweeper.controller.CellController
@@ -18,11 +17,8 @@ class GameView(private val cellSize: Int,
         alignment = Pos.CENTER
         for (cell in game.cells) {
             child(cell.x, cell.y) {
-                Fragment { CellController(cell, cellSize, flagIcon, mineIcon).initialize() }
+                CellController(cell, cellSize, flagIcon, mineIcon).initialize()
             }
-
         }
-
-
     }
 }

@@ -6,34 +6,28 @@ import eu.yeger.minesweeper.model.ModelBuilder
 import eu.yeger.minesweeper.view.GameView
 import javafx.scene.Node
 import javafx.scene.image.Image
-import lombok.Builder
 
-@Builder
 class Minesweeper {
 
-    @Builder.Default
-    private val width = 10
-    @Builder.Default
-    private val height = 10
-    @Builder.Default
-    private val mineCount = 20
-    @Builder.Default
-    private val cellSize = 40
+    var width = 10
+    var height = 10
+    var mineCount = 20
+    var cellSize = 40
 
-    private var flagIcon: Image? = null
-    private var mineIcon: Image? = null
+    var flagIcon: Image? = null
+    var mineIcon: Image? = null
 
-    private val onGameWon: Runnable? = null
-    private val onGameLost: Runnable? = null
+    var onGameWon: (() -> Unit)? = null
+    var onGameLost: (() -> Unit)? = null
 
-    private var modelBuilder: ModelBuilder? = null
-    private var gameView: GameView? = null
+    var modelBuilder: ModelBuilder? = null
+    var gameView: GameView? = null
 
     fun instance(): Node {
         defaultIconFallback()
         defaultBuilderFallback()
         val game = modelBuilder!!.build()
-        GameController(game, onGameWon, onGameLost)
+        GameController(game, Runnable { onGameWon }, Runnable { onGameLost })
         return gameView!!.build(game).instance()
     }
 

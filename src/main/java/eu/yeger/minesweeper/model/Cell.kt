@@ -16,7 +16,7 @@ class Cell(val x: Int,
     val number: IntegerProperty = SimpleIntegerProperty(0)
 
     val neighbors = ArrayList<Cell>()
-    private var game: Game? = null
+    var game: Game? = null
 
     fun withNeighbors(neighbors: Collection<Cell>): Cell {
         neighbors
