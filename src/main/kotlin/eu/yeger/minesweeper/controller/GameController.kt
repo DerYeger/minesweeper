@@ -3,9 +3,11 @@ package eu.yeger.minesweeper.controller
 import eu.yeger.minesweeper.model.Cell
 import eu.yeger.minesweeper.model.Game
 
-class GameController(private val game: Game,
-                     private val onGameWon: () -> Unit,
-                     private val onGameLost: () -> Unit) {
+class GameController(
+        private val game: Game,
+        private val onGameWon: () -> Unit,
+        private val onGameLost: () -> Unit
+) {
 
     init {
         addListeners()

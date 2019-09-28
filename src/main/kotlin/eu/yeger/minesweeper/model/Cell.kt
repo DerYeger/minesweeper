@@ -4,7 +4,11 @@ import eu.yeger.kotlin.javafx.*
 import javafx.beans.property.SimpleBooleanProperty
 import javafx.beans.property.SimpleIntegerProperty
 
-class Cell(val game: Game, val x: Int, val y: Int) {
+class Cell(
+        val game: Game,
+        val x: Int,
+        val y: Int
+) {
     val mineProperty = SimpleBooleanProperty(false)
     var hasMine by mineProperty.delegation()
 
@@ -28,7 +32,7 @@ class Cell(val game: Game, val x: Int, val y: Int) {
     }
 
     private fun withNeighbor(neighbor: Cell) {
-        if (!neighbors.contains(neighbor)) {
+        if (neighbor !in neighbors) {
             neighbors.add(neighbor)
             neighbor.doAddNeighbor(this)
         }

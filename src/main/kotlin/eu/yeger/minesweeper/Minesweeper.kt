@@ -27,6 +27,7 @@ class Minesweeper {
     var onGameLost: () -> Unit = {}
 
     var modelBuilder: ModelBuilder = DefaultModelBuilder
+
     private val fragmentBuilder: (Game) -> Fragment<Parent> = { game ->
         gridPane {
             alignment = Pos.CENTER

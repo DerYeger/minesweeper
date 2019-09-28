@@ -7,10 +7,12 @@ import javafx.scene.image.Image
 import javafx.scene.input.MouseButton
 import javafx.scene.input.MouseEvent
 
-class CellController(private val cell: Cell,
-                     private val cellSize: Int,
-                     private val flagIcon: Image,
-                     private val mineIcon: Image) {
+class CellController(
+        private val cell: Cell,
+        private val cellSize: Int,
+        private val flagIcon: Image,
+        private val mineIcon: Image
+) {
 
     fun initialize() = stackPane {
             maxWidth = cellSize.toDouble()
