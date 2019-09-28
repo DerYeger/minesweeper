@@ -14,8 +14,7 @@ class DefaultModelBuilder(private val width: Int,
         val cellMap = HashMap<Pair<Int, Int>, Cell>()
         Array(game.height) { y ->
             Array(game.width) {x ->
-                Cell(x, y).apply {
-                    setGame(game)
+                Cell(game, x, y).apply {
                     withNeighbors(fromMap(cellMap, x, y))
                     cellMap[x to y] = this
                 }

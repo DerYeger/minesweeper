@@ -4,8 +4,7 @@ import eu.yeger.kotlin.javafx.*
 import javafx.beans.property.SimpleBooleanProperty
 import javafx.beans.property.SimpleIntegerProperty
 
-class Cell(val x: Int,
-           val y: Int) {
+class Cell(val game: Game, val x: Int, val y: Int) {
     val mineProperty = SimpleBooleanProperty(false)
     var hasMine by mineProperty.delegation()
 
@@ -19,13 +18,16 @@ class Cell(val x: Int,
     var number by numberProperty.delegation()
 
     val neighbors = ArrayList<Cell>()
-    lateinit var game: Game
+
+    init {
+        game.withCell(this)
+    }
 
     fun withNeighbors(neighbors: Collection<Cell>) {
         neighbors.forEach { this.withNeighbor(it) }
     }
 
-    fun withNeighbor(neighbor: Cell) {
+    private fun withNeighbor(neighbor: Cell) {
         if (!neighbors.contains(neighbor)) {
             neighbors.add(neighbor)
             neighbor.doAddNeighbor(this)
@@ -34,14 +36,5 @@ class Cell(val x: Int,
 
     private fun doAddNeighbor(neighbor: Cell) {
         neighbors.add(neighbor)
-    }
-
-    fun setGame(game: Game): Cell {
-        game.withCell(this)
-        return this
-    }
-
-    internal fun doSetGame(game: Game) {
-        this.game = game
     }
 }

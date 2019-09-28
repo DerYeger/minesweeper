@@ -9,14 +9,9 @@ class Game(val width: Int, val height: Int) {
 
     val cells = ArrayList<Cell>()
 
-    fun withCells(cells: Collection<Cell>) {
-        cells.forEach { this.withCell(it) }
-    }
-
-    fun withCell(cell: Cell) {
+    internal fun withCell(cell: Cell) {
         if (!cells.contains(cell)) {
             cells.add(cell)
-            cell.doSetGame(this)
         }
     }
 
