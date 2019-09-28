@@ -14,34 +14,34 @@ class Minesweeper {
     var mineCount = 20
     var cellSize = 40
 
-    var flagIcon: Image? = null
-    var mineIcon: Image? = null
+    lateinit var flagIcon: Image
+    lateinit var mineIcon: Image
 
     var onGameWon: () -> Unit = {}
     var onGameLost: () -> Unit = {}
 
-    var modelBuilder: ModelBuilder? = null
-    var gameView: GameView? = null
+    lateinit var modelBuilder: ModelBuilder
+    private lateinit var gameView: GameView
 
     fun instance(): Node {
         defaultIconFallback()
         defaultBuilderFallback()
-        val game = modelBuilder!!.build()
+        val game = modelBuilder.build()
         GameController(game, onGameWon, onGameLost)
-        return gameView!!.build(game).instance()
+        return gameView.build(game).instance()
     }
 
     private fun defaultIconFallback() {
-        if (flagIcon == null)
+        if (!::flagIcon.isInitialized)
             flagIcon = Image("/flag.png", cellSize.toDouble(), cellSize.toDouble(), true, true)
-        if (mineIcon == null)
+        if (!::mineIcon.isInitialized)
             mineIcon = Image("/mine.png", cellSize.toDouble(), cellSize.toDouble(), true, true)
     }
 
     private fun defaultBuilderFallback() {
-        if (modelBuilder == null)
+        if (!::modelBuilder.isInitialized)
             modelBuilder = DefaultModelBuilder(width, height, mineCount)
-        if (gameView == null)
-            gameView = GameView(cellSize, flagIcon!!, mineIcon!!)
+        if (!::gameView.isInitialized)
+            gameView = GameView(cellSize, flagIcon, mineIcon)
     }
 }

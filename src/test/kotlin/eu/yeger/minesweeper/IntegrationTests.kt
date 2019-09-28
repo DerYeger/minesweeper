@@ -1,7 +1,10 @@
 package eu.yeger.minesweeper
 
 import eu.yeger.minesweeper.model.Cell
+import eu.yeger.minesweeper.model.DefaultModelBuilder
 import eu.yeger.minesweeper.model.Game
+import io.mockk.every
+import io.mockk.mockk
 import javafx.application.Platform
 import javafx.scene.Parent
 import javafx.scene.Scene
@@ -87,12 +90,8 @@ class IntegrationTests : ApplicationTest() {
             height = 2
             mineCount = 0
             cellSize = 30
-            onGameWon = {
-                won = true
-            }
-            onGameLost = {
-                lost = true
-            }
+            onGameWon = { won = true }
+            onGameLost = { lost = true }
         }
         setScene(Scene(minesweeper.instance() as Parent))
         click(15, 15, MouseButton.PRIMARY)
@@ -108,12 +107,8 @@ class IntegrationTests : ApplicationTest() {
             height = 1
             mineCount = 1
             cellSize = 20
-            onGameWon = {
-                won = true
-            }
-            onGameLost = {
-                lost = true
-            }
+            onGameWon = { won = true }
+            onGameLost = { lost = true }
         }
         setScene(Scene(minesweeper.instance() as Parent))
         clickOn(stage, MouseButton.SECONDARY)
@@ -126,72 +121,67 @@ class IntegrationTests : ApplicationTest() {
         assertTrue(lost)
     }
 
-//    @Test
-//    fun testUnveiling() {
-//        val modelBuilder = mockk(DefaultModelBuilder::class.java)
-//        `when`(modelBuilder.build()).thenReturn(buildTestGameAlpha())
-//        val minesweeper = Minesweeper().apply {
-//            cellSize = 30
-//            onGameWon = {
-//                won = true
-//            }
-//            onGameLost = {
-//                lost = true
-//            }
-//        }
-//        setScene(Scene(minesweeper.instance() as Parent))
-//        click(15, 15, MouseButton.PRIMARY)
-//        WaitForAsyncUtils.waitForFxEvents()
-//        assertTrue(won)
-//        assertFalse(lost)
-//    }
+    @Test
+    fun testUnveiling() {
+        val modelBuilder = mockk<DefaultModelBuilder>()
+        every { modelBuilder.build() } returns buildTestGameAlpha()
+        val minesweeper = Minesweeper().apply {
+            cellSize = 30
+            onGameWon = { won = true }
+            onGameLost = { lost = true }
+            this.modelBuilder = modelBuilder
+        }
+        setScene(Scene(minesweeper.instance() as Parent))
+        click(15, 15, MouseButton.PRIMARY)
+        WaitForAsyncUtils.waitForFxEvents()
+        assertTrue(won)
+        assertFalse(lost)
+    }
 
-//    @Test
-//    fun testUnveilingBlocked() {
-//        val modelBuilder = mock(DefaultModelBuilder::class.java)
-//        `when`(modelBuilder.build()).thenReturn(buildTestGameBeta())
-//        val minesweeper = Minesweeper
-//                .builder()
-//                .cellSize(30)
-//                .onGameWon({ won = true })
-//                .onGameLost({ lost = true })
-//                .modelBuilder(modelBuilder)
-//                .build()
-//        setScene(Scene(minesweeper.instance() as Parent))
-//        click(15, 15, MouseButton.PRIMARY)
-//        WaitForAsyncUtils.waitForFxEvents()
-//        assertFalse(won)
-//        assertFalse(lost)
-//    }
+    @Test
+    fun testUnveilingBlocked() {
+        val modelBuilder = mockk<DefaultModelBuilder>()
+        every { modelBuilder.build() } returns buildTestGameBeta()
+        val minesweeper = Minesweeper().apply {
+            cellSize = 30
+            onGameWon = { won = true }
+            onGameLost = { lost = true }
+            this.modelBuilder = modelBuilder
+        }
+        setScene(Scene(minesweeper.instance() as Parent))
+        click(15, 15, MouseButton.PRIMARY)
+        WaitForAsyncUtils.waitForFxEvents()
+        assertFalse(won)
+        assertFalse(lost)
+    }
 
-//    @Test
-//    fun testNumbers() {
-//        val modelBuilder = mock(DefaultModelBuilder::class.java)
-//        `when`(modelBuilder.build()).thenReturn(buildTestGameGamma())
-//        val minesweeper = Minesweeper
-//                .builder()
-//                .cellSize(30)
-//                .onGameWon({ won = true })
-//                .onGameLost({ lost = true })
-//                .modelBuilder(modelBuilder)
-//                .build()
-//        setScene(Scene(minesweeper.instance() as Parent))
-//        for (i in 0..9) {
-//            assertFalse(won)
-//            click(15 + 30 * i, 15, MouseButton.PRIMARY)
-//        }
-//        WaitForAsyncUtils.waitForFxEvents()
-//        assertTrue(won)
-//        assertFalse(lost)
-//        assertNotNull(lookup("#zero"))
-//        assertNotNull(lookup("#one"))
-//        assertNotNull(lookup("#two"))
-//        assertNotNull(lookup("#three"))
-//        assertNotNull(lookup("#four"))
-//        assertNotNull(lookup("#five"))
-//        assertNotNull(lookup("#six"))
-//        assertNotNull(lookup("#seven"))
-//        assertNotNull(lookup("#eight"))
-//        assertNotNull(lookup("#null"))
-//    }
+    @Test
+    fun testNumbers() {
+        val modelBuilder = mockk<DefaultModelBuilder>()
+        every { modelBuilder.build() } returns buildTestGameGamma()
+        val minesweeper = Minesweeper().apply {
+            cellSize = 30
+            onGameWon = { won = true }
+            onGameLost = { lost = true }
+            this.modelBuilder = modelBuilder
+        }
+        setScene(Scene(minesweeper.instance() as Parent))
+        for (i in 0..9) {
+            assertFalse(won)
+            click(15 + 30 * i, 15, MouseButton.PRIMARY)
+        }
+        WaitForAsyncUtils.waitForFxEvents()
+        assertTrue(won)
+        assertFalse(lost)
+        assertNotNull(lookup("#zero"))
+        assertNotNull(lookup("#one"))
+        assertNotNull(lookup("#two"))
+        assertNotNull(lookup("#three"))
+        assertNotNull(lookup("#four"))
+        assertNotNull(lookup("#five"))
+        assertNotNull(lookup("#six"))
+        assertNotNull(lookup("#seven"))
+        assertNotNull(lookup("#eight"))
+        assertNotNull(lookup("#null"))
+    }
 }
