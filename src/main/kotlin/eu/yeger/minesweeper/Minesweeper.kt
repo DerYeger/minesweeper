@@ -26,7 +26,7 @@ class Minesweeper {
     var onGameWon: () -> Unit = {}
     var onGameLost: () -> Unit = {}
 
-    lateinit var modelBuilder: ModelBuilder
+    var modelBuilder: ModelBuilder = DefaultModelBuilder
     private val fragmentBuilder: (Game) -> Fragment<Parent> = { game ->
         gridPane {
             alignment = Pos.CENTER
@@ -41,22 +41,18 @@ class Minesweeper {
     }
 
     fun instance(): Node {
-        defaultIconFallback()
-        defaultBuilderFallback()
-        val game = modelBuilder.build()
+        defaultFallback()
+        flagIcon = Image("/flag.png", cellSize.toDouble(), cellSize.toDouble(), true, true)
+        mineIcon = Image("/mine.png", cellSize.toDouble(), cellSize.toDouble(), true, true)
+        val game = modelBuilder.build(width, height, mineCount)
         GameController(game, onGameWon, onGameLost)
         return fragmentBuilder.invoke(game).instance()
     }
 
-    private fun defaultIconFallback() {
+    private fun defaultFallback() {
         if (!::flagIcon.isInitialized)
             flagIcon = Image("/flag.png", cellSize.toDouble(), cellSize.toDouble(), true, true)
         if (!::mineIcon.isInitialized)
             mineIcon = Image("/mine.png", cellSize.toDouble(), cellSize.toDouble(), true, true)
-    }
-
-    private fun defaultBuilderFallback() {
-        if (!::modelBuilder.isInitialized)
-            modelBuilder = DefaultModelBuilder(width, height, mineCount)
     }
 }

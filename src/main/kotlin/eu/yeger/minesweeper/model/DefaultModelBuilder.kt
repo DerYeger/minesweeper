@@ -1,14 +1,13 @@
 package eu.yeger.minesweeper.model
 
-class DefaultModelBuilder(private val width: Int,
-                          private val height: Int,
-                          private val bombCount: Int) : ModelBuilder {
+object DefaultModelBuilder : ModelBuilder {
 
-    override fun build() = Game(width, height).also {
-        initCells(it)
-        initBombs(it, bombCount)
-        initNumbers(it)
-    }
+    override fun build(width: Int, height: Int, mineCount: Int) =
+            Game(width, height).also {
+                initCells(it)
+                initBombs(it, mineCount)
+                initNumbers(it)
+            }
 
     private fun initCells(game: Game) {
         val cellMap = HashMap<Pair<Int, Int>, Cell>()

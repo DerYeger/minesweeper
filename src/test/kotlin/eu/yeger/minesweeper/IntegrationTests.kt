@@ -44,7 +44,7 @@ class IntegrationTests : ApplicationTest() {
     }
 
     private fun testGameAlphaBuilder() = object: ModelBuilder {
-        override fun build(): Game {
+        override fun build(width: Int, height: Int, mineCount: Int): Game {
             val game = Game(2, 2)
             val tl = Cell(game,0, 0)
             val tr = Cell(game,1, 0)
@@ -58,7 +58,7 @@ class IntegrationTests : ApplicationTest() {
     }
 
     private fun testGameBetaBuilder() = object: ModelBuilder {
-        override fun build(): Game {
+        override fun build(width: Int, height: Int, mineCount: Int): Game {
             val game = Game(2, 2)
             val tl = Cell(game,0, 0)
             val tr = Cell(game,1, 0)
@@ -76,7 +76,7 @@ class IntegrationTests : ApplicationTest() {
     }
 
     private fun testGameGammaBuilder() = object: ModelBuilder {
-        override fun build(): Game {
+        override fun build(width: Int, height: Int, mineCount: Int): Game {
             val game = Game(10, 1)
             for (i in 0..9) {
                 val cell = Cell(game, i, 0)
