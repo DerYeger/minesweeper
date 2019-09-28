@@ -13,7 +13,7 @@ class Cell(val x: Int,
     val number: IntegerProperty = SimpleIntegerProperty(0)
 
     val neighbors = ArrayList<Cell>()
-    var game: Game? = null
+    lateinit var game: Game
 
     fun withNeighbors(neighbors: Collection<Cell>): Cell {
         neighbors.forEach { this.withNeighbor(it) }

@@ -55,7 +55,7 @@ class CellController(private val cell: Cell,
     }
 
     private fun handleClick(cell: Cell, event: MouseEvent) {
-        if (cell.unveiled.get() || cell.game?.state?.get() != Game.State.IN_PROGRESS) return
+        if (cell.unveiled.get() || cell.game.state.get() != Game.State.IN_PROGRESS) return
         if (event.button == MouseButton.PRIMARY && !cell.flagged.get()) {
             cell.unveiled.set(true)
         } else if (event.button == MouseButton.SECONDARY) {
