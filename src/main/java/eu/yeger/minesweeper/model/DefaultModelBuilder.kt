@@ -32,10 +32,6 @@ class DefaultModelBuilder(private val width: Int,
                     cellMap[x + 1 to y - 1]
             )
 
-    private fun getCellAtCoordinates(cells: Array<Array<Cell>>, x: Int, y: Int): Cell? {
-        return if (y < 0 || cells.size <= y || x < 0 || cells[y].size <= x) null else cells[y][x]
-    }
-
     private fun initBombs(game: Game, bombCount: Int) {
         game
                 .cells
