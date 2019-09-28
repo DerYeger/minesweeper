@@ -3,8 +3,6 @@ package eu.yeger.minesweeper
 import eu.yeger.minesweeper.model.Cell
 import eu.yeger.minesweeper.model.Game
 import eu.yeger.minesweeper.model.ModelBuilder
-import io.mockk.every
-import io.mockk.junit5.MockKExtension
 import javafx.application.Platform
 import javafx.scene.Parent
 import javafx.scene.Scene
@@ -12,7 +10,6 @@ import javafx.scene.input.MouseButton
 import javafx.stage.Stage
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
 import org.testfx.framework.junit5.ApplicationTest
 import org.testfx.util.WaitForAsyncUtils
 
