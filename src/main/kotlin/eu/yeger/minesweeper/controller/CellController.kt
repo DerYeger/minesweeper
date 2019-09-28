@@ -13,43 +13,43 @@ class CellController(private val cell: Cell,
                      private val mineIcon: Image) {
 
     fun initialize() = stackPane {
-            styleClass.add("cell")
             maxWidth = cellSize.toDouble()
             maxHeight = cellSize.toDouble()
+            styleClass.add("cell")
             child {
                     if (cell.mine.get()) {
                         imageView {
                             image = mineIcon
-                            visibleProperty().bindBidirectional(cell.unveiled)
-                            styleClass.add("mine")
                             fitWidth = cellSize.toDouble()
                             fitHeight = cellSize.toDouble()
+                            styleClass.add("mine")
+                            visibleProperty().bindBidirectional(cell.unveiled)
                         }
                     } else {
                         label {
                             textProperty().bind(cell.number.asString())
-                            visibleProperty().bindBidirectional(cell.unveiled)
                             styleClass.addAll("number", asWord(cell.number.get()))
+                            visibleProperty().bindBidirectional(cell.unveiled)
                         }
                     }
             }
         child {
             rectangle {
-                visibleProperty().bind(cell.unveiled.not())
-                styleClass.add("blocker")
                 width = cellSize.toDouble()
                 height = cellSize.toDouble()
                 setOnMouseClicked { handleClick(cell, it) }
+                styleClass.add("blocker")
+                visibleProperty().bind(cell.unveiled.not())
             }
         }
         child {
             imageView {
                 image = flagIcon
-                visibleProperty().bindBidirectional(cell.flagged)
-                styleClass.add("flag")
-                setOnMouseClicked { event -> handleClick(cell, event) }
                 fitWidth = cellSize.toDouble()
                 fitHeight = cellSize.toDouble()
+                setOnMouseClicked { event -> handleClick(cell, event) }
+                styleClass.add("flag")
+                visibleProperty().bindBidirectional(cell.flagged)
             }
         }
     }

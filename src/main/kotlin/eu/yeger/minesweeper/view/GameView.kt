@@ -12,9 +12,9 @@ class GameView(private val cellSize: Int,
                private val mineIcon: Image) {
 
     fun build(game: Game) = gridPane {
+        alignment = Pos.CENTER
         styleClass.add("container")
         stylesheets.add("/default.css")
-        alignment = Pos.CENTER
         for (cell in game.cells) {
             child(cell.x, cell.y) {
                 CellController(cell, cellSize, flagIcon, mineIcon).initialize()
