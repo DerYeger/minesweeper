@@ -9,17 +9,15 @@ class Game(val width: Int, val height: Int) {
 
     val cells = ArrayList<Cell>()
 
-    fun withCells(cells: Collection<Cell>): Game {
+    fun withCells(cells: Collection<Cell>) {
         cells.forEach { this.withCell(it) }
-        return this
     }
 
-    fun withCell(cell: Cell): Game {
+    fun withCell(cell: Cell) {
         if (!cells.contains(cell)) {
             cells.add(cell)
             cell.doSetGame(this)
         }
-        return this
     }
 
     enum class State {

@@ -21,17 +21,15 @@ class Cell(val x: Int,
     val neighbors = ArrayList<Cell>()
     lateinit var game: Game
 
-    fun withNeighbors(neighbors: Collection<Cell>): Cell {
+    fun withNeighbors(neighbors: Collection<Cell>) {
         neighbors.forEach { this.withNeighbor(it) }
-        return this
     }
 
-    fun withNeighbor(neighbor: Cell): Cell {
+    fun withNeighbor(neighbor: Cell) {
         if (!neighbors.contains(neighbor)) {
             neighbors.add(neighbor)
             neighbor.doAddNeighbor(this)
         }
-        return this
     }
 
     private fun doAddNeighbor(neighbor: Cell) {

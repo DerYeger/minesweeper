@@ -14,25 +14,25 @@ class DefaultModelBuilder(private val width: Int,
         val cellMap = HashMap<Pair<Int, Int>, Cell>()
         Array(game.height) { y ->
             Array(game.width) {x ->
-                Cell(x, y)
-                        .setGame(game)
-                        .withNeighbors(fromMap(cellMap, x, y))
-                        .also { cellMap[x to y] = it }
+                Cell(x, y).apply {
+                    setGame(game)
+                    withNeighbors(fromMap(cellMap, x, y))
+                    cellMap[x to y] = this
+                }
             }
         }
     }
 
     private fun fromMap(cellMap: HashMap<Pair<Int, Int>, Cell>, x: Int, y: Int) =
             listOfNotNull(
-                    cellMap[x - 1 to y],
-                    cellMap[x - 1 to y - 1],
-                    cellMap[x to y - 1],
-                    cellMap[x + 1 to y - 1]
+                    cellMap[x - 1 to y    ], //left
+                    cellMap[x - 1 to y - 1], //top-left
+                    cellMap[x     to y - 1], //top
+                    cellMap[x + 1 to y - 1]  //top-right
             )
 
     private fun initBombs(game: Game, bombCount: Int) {
-        game
-                .cells
+        game.cells
                 .shuffled()
                 .asSequence()
                 .take(bombCount)
@@ -40,7 +40,7 @@ class DefaultModelBuilder(private val width: Int,
     }
 
     private fun initNumbers(game: Game) {
-        game.cells.forEach { it.number = calculateNumber(it) }
+        game.cells.parallelStream().forEach { it.number = calculateNumber(it) }
     }
 
     private fun calculateNumber(cell: Cell) = cell.neighbors.filter { it.hasMine }.count()
