@@ -23,21 +23,17 @@ repositories {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
-    implementation 'com.github.DerYeger:kotlin.javafx:0.0.2-experimental'
+    implementation group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8'
+    implementation group: 'com.github.DerYeger', name: 'kotlin.javafx', version: '0.0.2-experimental'
 
-    runtimeOnly 'org.openjfx:javafx-graphics:$javafx.version:win'
-    runtimeOnly 'org.openjfx:javafx-graphics:$javafx.version:linux'
-    runtimeOnly 'org.openjfx:javafx-graphics:$javafx.version:mac'
-
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.2'
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.2'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.2'
 
     testImplementation group: 'org.testfx', name: 'testfx-core', version: '4.0.16-alpha'
     testImplementation group: 'org.testfx', name: 'testfx-junit5', version: '4.0.16-alpha'
     testImplementation group: 'org.testfx', name: 'openjfx-monocle', version: 'jdk-12.0.1+2'
 
-    testImplementation 'io.mockk:mockk:1.9.3'
+    testImplementation group: 'io.mockk', name: 'mockk', version: '1.9.3'
 }
 
 jacocoTestReport {
@@ -49,13 +45,13 @@ jacocoTestReport {
 
 compileKotlin {
     kotlinOptions {
-        jvmTarget = "12"
+        jvmTarget = '12'
     }
 }
 
 compileTestKotlin {
     kotlinOptions {
-        jvmTarget = "12"
+        jvmTarget = '12'
     }
 }
 
