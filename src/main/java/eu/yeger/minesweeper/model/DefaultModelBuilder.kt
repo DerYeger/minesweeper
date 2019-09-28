@@ -13,24 +13,24 @@ class DefaultModelBuilder(private val width: Int,
     }
 
     private fun initCells(game: Game) {
-        val cells = Array<Array<Cell>>(game.height) { arrayOfNulls(game.width) }
-        for (y in 0 until game.height) {
-            for (x in 0 until game.width) {
-                cells[y][x] = Cell(x, y)
+        val cellMap = HashMap<Pair<Int, Int>, Cell>()
+        Array(game.height) { y ->
+            Array(game.width) {x ->
+                Cell(x, y)
                         .setGame(game)
-                        .withNeighbors(initNeighbors(cells, x, y))
+                        .withNeighbors(fromMap(cellMap, x, y))
+                        .also { cellMap[x to y] = it }
             }
         }
     }
 
-    private fun initNeighbors(cells: Array<Array<Cell>>, x: Int, y: Int): List<Cell> {
-        val neighbors = ArrayList<Cell?>()
-        neighbors.add(getCellAtCoordinates(cells, x - 1, y)) //left
-        neighbors.add(getCellAtCoordinates(cells, x - 1, y - 1)) //top left
-        neighbors.add(getCellAtCoordinates(cells, x, y - 1)) //top
-        neighbors.add(getCellAtCoordinates(cells, x + 1, y - 1)) //top right
-        return neighbors.filterNotNull()
-    }
+    private fun fromMap(cellMap: HashMap<Pair<Int, Int>, Cell>, x: Int, y: Int) =
+            listOfNotNull(
+                    cellMap[x - 1 to y],
+                    cellMap[x - 1 to y - 1],
+                    cellMap[x to y - 1],
+                    cellMap[x + 1 to y - 1]
+            )
 
     private fun getCellAtCoordinates(cells: Array<Array<Cell>>, x: Int, y: Int): Cell? {
         return if (y < 0 || cells.size <= y || x < 0 || cells[y].size <= x) null else cells[y][x]
