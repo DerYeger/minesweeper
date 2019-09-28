@@ -1,29 +1,24 @@
 package eu.yeger.minesweeper.controller
 
 import eu.yeger.kotlin.javafx.*
+import eu.yeger.minesweeper.ViewConfiguration
 import eu.yeger.minesweeper.model.Cell
 import eu.yeger.minesweeper.model.Game
-import javafx.scene.image.Image
 import javafx.scene.input.MouseButton
 import javafx.scene.input.MouseEvent
 
-class CellController(
-        private val cell: Cell,
-        private val cellSize: Int,
-        private val flagIcon: Image,
-        private val mineIcon: Image
-) {
+object CellController {
 
-    fun initialize() = stackPane {
-            maxWidth = cellSize.toDouble()
-            maxHeight = cellSize.toDouble()
+    fun initialize(cell: Cell, viewConfiguration: ViewConfiguration) = stackPane {
+            maxWidth = viewConfiguration.cellSize
+            maxHeight = viewConfiguration.cellSize
             styleClass.add("cell")
             child {
                     if (cell.hasMine) {
                         imageView {
-                            image = mineIcon
-                            fitWidth = cellSize.toDouble()
-                            fitHeight = cellSize.toDouble()
+                            image = viewConfiguration.mineIcon
+                            fitWidth = viewConfiguration.cellSize
+                            fitHeight = viewConfiguration.cellSize
                             styleClass.add("mine")
                             visibleProperty().bindBidirectional(cell.unveiledProperty)
                         }
@@ -37,8 +32,8 @@ class CellController(
             }
         child {
             rectangle {
-                width = cellSize.toDouble()
-                height = cellSize.toDouble()
+                width = viewConfiguration.cellSize
+                height = viewConfiguration.cellSize
                 setOnMouseClicked { handleClick(cell, it) }
                 styleClass.add("blocker")
                 visibleProperty().bind(cell.unveiledProperty.not())
@@ -46,9 +41,9 @@ class CellController(
         }
         child {
             imageView {
-                image = flagIcon
-                fitWidth = cellSize.toDouble()
-                fitHeight = cellSize.toDouble()
+                image = viewConfiguration.flagIcon
+                fitWidth = viewConfiguration.cellSize
+                fitHeight = viewConfiguration.cellSize
                 setOnMouseClicked { event -> handleClick(cell, event) }
                 styleClass.add("flag")
                 visibleProperty().bindBidirectional(cell.flagProperty)

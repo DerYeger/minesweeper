@@ -13,12 +13,18 @@ import javafx.scene.Node
 import javafx.scene.Parent
 import javafx.scene.image.Image
 
+class ViewConfiguration(
+        val cellSize: Double,
+        val flagIcon: Image,
+        val mineIcon: Image
+)
+
 class Minesweeper {
 
     var width = 10
     var height = 10
     var mineCount = 20
-    var cellSize = 40
+    var cellSize = 40.0
 
     var flagIcon: (size: Double) -> Image = { size -> Image("/flag.png", size, size, true, true) }
     var mineIcon: (size: Double) -> Image = { size -> Image("/mine.png", size, size, true, true) }
@@ -29,18 +35,19 @@ class Minesweeper {
     var modelBuilder: ModelBuilder = DefaultModelBuilder
 
     private val fragmentBuilder: (Game) -> Fragment<Parent> = { game ->
+        val viewConfiguration = ViewConfiguration(
+                cellSize,
+                flagIcon.invoke(cellSize),
+                mineIcon.invoke(cellSize)
+        )
+
         gridPane {
             alignment = Pos.CENTER
             styleClass.add("container")
             stylesheets.add("/default.css")
             for (cell in game.cells) {
                 child(cell.x, cell.y) {
-                    CellController(
-                            cell,
-                            cellSize,
-                            flagIcon.invoke(cellSize.toDouble()),
-                            mineIcon.invoke(cellSize.toDouble())
-                    ).initialize()
+                    CellController.initialize(cell, viewConfiguration)
                 }
             }
         }

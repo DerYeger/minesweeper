@@ -64,10 +64,7 @@ class IntegrationTests : ApplicationTest() {
             val tr = Cell(game,1, 0)
             val bl = Cell(game,0, 1)
             val br = Cell(game,1, 1)
-            tl.number = 1
-            tr.number = 1
-            bl.number = 1
-            br.number = 1
+            game.cells.forEach { it.number = 1 }
             tl.withNeighbors(listOf(tr, bl, br))
             br.hasMine = true
 
@@ -82,7 +79,6 @@ class IntegrationTests : ApplicationTest() {
                 val cell = Cell(game, i, 0)
                 cell.number = i
             }
-
             return game
         }
     }
@@ -94,7 +90,7 @@ class IntegrationTests : ApplicationTest() {
             width = 2
             height = 2
             mineCount = 0
-            cellSize = 30
+            cellSize = 30.0
             onGameWon = { won = true }
             onGameLost = { lost = true }
         }
@@ -111,7 +107,7 @@ class IntegrationTests : ApplicationTest() {
             width = 1
             height = 1
             mineCount = 1
-            cellSize = 20
+            cellSize = 20.0
             onGameWon = { won = true }
             onGameLost = { lost = true }
         }
@@ -129,7 +125,7 @@ class IntegrationTests : ApplicationTest() {
     @Test
     fun testUnveiling() {
         val minesweeper = Minesweeper().apply {
-            cellSize = 30
+            cellSize = 30.0
             onGameWon = { won = true }
             onGameLost = { lost = true }
             this.modelBuilder = testGameAlphaBuilder()
@@ -144,7 +140,7 @@ class IntegrationTests : ApplicationTest() {
     @Test
     fun testUnveilingBlocked() {
         val minesweeper = Minesweeper().apply {
-            cellSize = 30
+            cellSize = 30.0
             onGameWon = { won = true }
             onGameLost = { lost = true }
             this.modelBuilder = testGameBetaBuilder()
@@ -159,7 +155,7 @@ class IntegrationTests : ApplicationTest() {
     @Test
     fun testNumbers() {
         val minesweeper = Minesweeper().apply {
-            cellSize = 30
+            cellSize = 30.0
             onGameWon = { won = true }
             onGameLost = { lost = true }
             this.modelBuilder = testGameGammaBuilder()
