@@ -24,7 +24,7 @@ repositories {
 
 dependencies {
     implementation group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8'
-    implementation group: 'com.github.DerYeger', name: 'kotlin.javafx', version: '0.0.2-experimental'
+    implementation group: 'com.github.DerYeger', name: 'kotlin.javafx', version: '0.0.5-experimental'
 
     testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.2'
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.2'

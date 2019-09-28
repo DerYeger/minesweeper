@@ -52,7 +52,7 @@ class IntegrationTests : ApplicationTest() {
             val br = Cell(1, 1)
             tl.withNeighbors(listOf(tr, bl, br))
             game.withCells(listOf(tl, tr, bl, br))
-            br.mine.set(true)
+            br.hasMine = true
 
             return game
         }
@@ -65,13 +65,13 @@ class IntegrationTests : ApplicationTest() {
             val tr = Cell(1, 0)
             val bl = Cell(0, 1)
             val br = Cell(1, 1)
-            tl.number.set(1)
-            tr.number.set(1)
-            bl.number.set(1)
-            br.number.set(1)
+            tl.number = 1
+            tr.number = 1
+            bl.number = 1
+            br.number = 1
             tl.withNeighbors(listOf(tr, bl, br))
             game.withCells(listOf(tl, tr, bl, br))
-            br.mine.set(true)
+            br.hasMine = true
 
             return game
         }
@@ -82,7 +82,7 @@ class IntegrationTests : ApplicationTest() {
             val game = Game(10, 1)
             for (i in 0..9) {
                 val cell = Cell(i, 0)
-                cell.setGame(game).number.set(i)
+                cell.setGame(game).number = i
             }
 
             return game

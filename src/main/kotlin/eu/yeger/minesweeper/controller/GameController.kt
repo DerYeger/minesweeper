@@ -13,7 +13,7 @@ class GameController(private val game: Game,
 
     private fun addListeners() {
         game.cells.forEach { this.addCellListener(it) }
-        game.state.addListener { _, _, newValue ->
+        game.stateProperty.addListener { _, _, newValue ->
             when(newValue) {
                 Game.State.WON -> onGameWon.invoke()
                 Game.State.LOST -> onGameLost.invoke()
@@ -23,11 +23,11 @@ class GameController(private val game: Game,
     }
 
     private fun addCellListener(cell: Cell) {
-        cell.unveiled.addListener { _, _, newValue ->
+        cell.unveiledProperty.addListener { _, _, newValue ->
             when {
                 !newValue -> return@addListener
-                cell.mine.get() -> game.state.set(Game.State.LOST)
-                gameWon() -> game.state.set(Game.State.WON)
+                cell.hasMine -> game.state = Game.State.LOST
+                gameWon() -> game.state = Game.State.WON
                 else -> unveilNeighbors(cell)
             }
         }
@@ -35,15 +35,15 @@ class GameController(private val game: Game,
 
     private fun unveilNeighbors(cell: Cell) {
         cell.neighbors.forEach { neighbor ->
-            if (!neighbor.mine.get()
-                    && !neighbor.flagged.get()
-                    && !neighbor.unveiled.get()
-                    && (neighbor.number.get() == 0 || cell.number.get() == 0)) {
-                neighbor.unveiled.set(true)
+            if (!neighbor.hasMine
+                    && !neighbor.hasFlag
+                    && !neighbor.unveiled
+                    && (neighbor.number == 0 || cell.number == 0)) {
+                neighbor.unveiled = true
             }
         }
     }
 
     private fun gameWon() =
-            game.cells.all { it.mine.get() xor it.unveiled.get() }
+            game.cells.all { it.hasMine xor it.unveiled}
 }

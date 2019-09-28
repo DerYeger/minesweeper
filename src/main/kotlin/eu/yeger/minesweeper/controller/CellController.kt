@@ -17,19 +17,19 @@ class CellController(private val cell: Cell,
             maxHeight = cellSize.toDouble()
             styleClass.add("cell")
             child {
-                    if (cell.mine.get()) {
+                    if (cell.hasMine) {
                         imageView {
                             image = mineIcon
                             fitWidth = cellSize.toDouble()
                             fitHeight = cellSize.toDouble()
                             styleClass.add("mine")
-                            visibleProperty().bindBidirectional(cell.unveiled)
+                            visibleProperty().bindBidirectional(cell.unveiledProperty)
                         }
                     } else {
                         label {
-                            textProperty().bind(cell.number.asString())
-                            styleClass.addAll("number", asWord(cell.number.get()))
-                            visibleProperty().bindBidirectional(cell.unveiled)
+                            textProperty().bind(cell.numberProperty.asString())
+                            styleClass.addAll("number", asWord(cell.number))
+                            visibleProperty().bindBidirectional(cell.unveiledProperty)
                         }
                     }
             }
@@ -39,7 +39,7 @@ class CellController(private val cell: Cell,
                 height = cellSize.toDouble()
                 setOnMouseClicked { handleClick(cell, it) }
                 styleClass.add("blocker")
-                visibleProperty().bind(cell.unveiled.not())
+                visibleProperty().bind(cell.unveiledProperty.not())
             }
         }
         child {
@@ -49,17 +49,17 @@ class CellController(private val cell: Cell,
                 fitHeight = cellSize.toDouble()
                 setOnMouseClicked { event -> handleClick(cell, event) }
                 styleClass.add("flag")
-                visibleProperty().bindBidirectional(cell.flagged)
+                visibleProperty().bindBidirectional(cell.flagProperty)
             }
         }
     }
 
     private fun handleClick(cell: Cell, event: MouseEvent) {
-        if (cell.unveiled.get() || cell.game.state.get() != Game.State.IN_PROGRESS) return
-        if (event.button == MouseButton.PRIMARY && !cell.flagged.get()) {
-            cell.unveiled.set(true)
+        if (cell.unveiled || cell.game.state != Game.State.IN_PROGRESS) return
+        if (event.button == MouseButton.PRIMARY && !cell.hasFlag) {
+            cell.unveiled = true
         } else if (event.button == MouseButton.SECONDARY) {
-            cell.flagged.set(!cell.flagged.get())
+            cell.hasFlag = cell.hasFlag.not()
         }
     }
 

@@ -36,12 +36,12 @@ class DefaultModelBuilder(private val width: Int,
                 .shuffled()
                 .asSequence()
                 .take(bombCount)
-                .forEach { it.mine.value = true }
+                .forEach { it.hasMine = true }
     }
 
     private fun initNumbers(game: Game) {
-        game.cells.forEach { it.number.value = calculateNumber(it) }
+        game.cells.forEach { it.number = calculateNumber(it) }
     }
 
-    private fun calculateNumber(cell: Cell) = cell.neighbors.filter { it.mine.get() }.count()
+    private fun calculateNumber(cell: Cell) = cell.neighbors.filter { it.hasMine }.count()
 }

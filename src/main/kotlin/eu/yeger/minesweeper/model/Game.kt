@@ -1,10 +1,12 @@
 package eu.yeger.minesweeper.model
 
-import javafx.beans.property.ObjectProperty
+import eu.yeger.kotlin.javafx.*
 import javafx.beans.property.SimpleObjectProperty
 
 class Game(val width: Int, val height: Int) {
-    val state: ObjectProperty<State> = SimpleObjectProperty(State.IN_PROGRESS)
+    val stateProperty = SimpleObjectProperty<State>(State.IN_PROGRESS)
+    var state: State by stateProperty.delegation()
+
     val cells = ArrayList<Cell>()
 
     fun withCells(cells: Collection<Cell>): Game {
