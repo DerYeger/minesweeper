@@ -20,8 +20,8 @@ class Minesweeper {
     var mineCount = 20
     var cellSize = 40
 
-    lateinit var flagIcon: Image
-    lateinit var mineIcon: Image
+    var flagIcon: (size: Double) -> Image = { size -> Image("/flag.png", size, size, true, true) }
+    var mineIcon: (size: Double) -> Image = { size -> Image("/mine.png", size, size, true, true) }
 
     var onGameWon: () -> Unit = {}
     var onGameLost: () -> Unit = {}
@@ -34,25 +34,20 @@ class Minesweeper {
             stylesheets.add("/default.css")
             for (cell in game.cells) {
                 child(cell.x, cell.y) {
-                    CellController(cell, cellSize, flagIcon, mineIcon).initialize()
+                    CellController(
+                            cell,
+                            cellSize,
+                            flagIcon.invoke(cellSize.toDouble()),
+                            mineIcon.invoke(cellSize.toDouble())
+                    ).initialize()
                 }
             }
         }
     }
 
     fun instance(): Node {
-        defaultFallback()
-        flagIcon = Image("/flag.png", cellSize.toDouble(), cellSize.toDouble(), true, true)
-        mineIcon = Image("/mine.png", cellSize.toDouble(), cellSize.toDouble(), true, true)
         val game = modelBuilder.build(width, height, mineCount)
         GameController(game, onGameWon, onGameLost)
         return fragmentBuilder.invoke(game).instance()
-    }
-
-    private fun defaultFallback() {
-        if (!::flagIcon.isInitialized)
-            flagIcon = Image("/flag.png", cellSize.toDouble(), cellSize.toDouble(), true, true)
-        if (!::mineIcon.isInitialized)
-            mineIcon = Image("/mine.png", cellSize.toDouble(), cellSize.toDouble(), true, true)
     }
 }
