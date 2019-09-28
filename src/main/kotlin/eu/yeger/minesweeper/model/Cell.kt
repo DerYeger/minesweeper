@@ -5,9 +5,6 @@ import javafx.beans.property.IntegerProperty
 import javafx.beans.property.SimpleBooleanProperty
 import javafx.beans.property.SimpleIntegerProperty
 
-import java.util.ArrayList
-import java.util.Objects
-
 class Cell(val x: Int,
            val y: Int) {
     val mine: BooleanProperty = SimpleBooleanProperty(false)
@@ -19,10 +16,7 @@ class Cell(val x: Int,
     var game: Game? = null
 
     fun withNeighbors(neighbors: Collection<Cell>): Cell {
-        neighbors
-                .stream()
-                .filter { Objects.nonNull(it) }
-                .forEach { this.withNeighbor(it) }
+        neighbors.forEach { this.withNeighbor(it) }
         return this
     }
 
@@ -39,13 +33,11 @@ class Cell(val x: Int,
     }
 
     fun setGame(game: Game): Cell {
-        Objects.requireNonNull(game)
         game.withCell(this)
         return this
     }
 
     internal fun doSetGame(game: Game) {
-        Objects.requireNonNull(game)
         this.game = game
     }
 }

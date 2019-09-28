@@ -3,8 +3,6 @@ package eu.yeger.minesweeper.model
 import javafx.beans.property.ObjectProperty
 import javafx.beans.property.SimpleObjectProperty
 
-import java.util.ArrayList
-
 class Game(val width: Int, val height: Int) {
     val state: ObjectProperty<State> = SimpleObjectProperty(State.IN_PROGRESS)
     val cells = ArrayList<Cell>()
