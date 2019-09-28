@@ -17,8 +17,8 @@ class Minesweeper {
     var flagIcon: Image? = null
     var mineIcon: Image? = null
 
-    var onGameWon: (() -> Unit)? = null
-    var onGameLost: (() -> Unit)? = null
+    var onGameWon: () -> Unit = {}
+    var onGameLost: () -> Unit = {}
 
     var modelBuilder: ModelBuilder? = null
     var gameView: GameView? = null
@@ -27,7 +27,7 @@ class Minesweeper {
         defaultIconFallback()
         defaultBuilderFallback()
         val game = modelBuilder!!.build()
-        GameController(game, Runnable { onGameWon }, Runnable { onGameLost })
+        GameController(game, onGameWon, onGameLost)
         return gameView!!.build(game).instance()
     }
 

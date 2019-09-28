@@ -4,8 +4,8 @@ import eu.yeger.minesweeper.model.Cell
 import eu.yeger.minesweeper.model.Game
 
 class GameController(private val game: Game,
-                     private val onGameWon: Runnable?,
-                     private val onGameLost: Runnable?) {
+                     private val onGameWon: () -> Unit,
+                     private val onGameLost: () -> Unit) {
 
     init {
         addListeners()
@@ -15,8 +15,8 @@ class GameController(private val game: Game,
         game.cells.forEach { this.addCellListener(it) }
         game.state.addListener { _, _, newValue ->
             when(newValue) {
-                Game.State.WON -> onGameWon?.run()
-                Game.State.LOST -> onGameLost?.run()
+                Game.State.WON -> onGameWon.invoke()
+                Game.State.LOST -> onGameLost.invoke()
                 else -> return@addListener
             }
         }
