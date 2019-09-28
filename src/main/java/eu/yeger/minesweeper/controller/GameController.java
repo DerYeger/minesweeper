@@ -19,8 +19,8 @@ public class GameController {
     }
 
     private void addListeners() {
-        game.cells.forEach(this::addCellListener);
-        game.state.addListener((observableValue, oldValue, newValue) -> {
+        game.getCells().forEach(this::addCellListener);
+        game.getState().addListener((observableValue, oldValue, newValue) -> {
             if (onGameWon != null && newValue.equals(Game.State.WON)) {
                 onGameWon.run();
             } else if (onGameLost != null && newValue.equals(Game.State.LOST)) {
@@ -30,12 +30,12 @@ public class GameController {
     }
 
     private void addCellListener(final Cell cell) {
-        cell.unveiled.addListener((observableValue, oldValue, newValue) -> {
+        cell.getUnveiled().addListener((observableValue, oldValue, newValue) -> {
             if (!newValue) return;
-            if (cell.mine.get()) {
-                game.state.set(Game.State.LOST);
+            if (cell.getMine().get()) {
+                game.getState().set(Game.State.LOST);
             } else if (gameWon()) {
-                game.state.set(Game.State.WON);
+                game.getState().set(Game.State.WON);
             } else {
                 unveilNeighbors(cell);
             }
@@ -44,19 +44,18 @@ public class GameController {
 
     private void unveilNeighbors(final Cell cell) {
         cell.getNeighbors().forEach(neighbor -> {
-            if (!neighbor.mine.get()
-                    && !neighbor.flag.get()
-                    && !neighbor.unveiled.get()
-                    && (neighbor.number.get() == 0 || cell.number.get() == 0)) {
-                neighbor.unveiled.set(true);
+            if (!neighbor.getMine().get()
+                    && !neighbor.getFlagged().get()
+                    && !neighbor.getUnveiled().get()
+                    && (neighbor.getNumber().get() == 0 || cell.getNumber().get() == 0)) {
+                neighbor.getUnveiled().set(true);
             }
         });
     }
 
     private boolean gameWon() {
-        return game
-                .cells
+        return game.getCells()
                 .stream()
-                .allMatch(cell -> cell.mine.get() ^ cell.unveiled.get());
+                .allMatch(cell -> cell.getMine().get() ^ cell.getUnveiled().get());
     }
 }
