@@ -6,41 +6,40 @@ import eu.yeger.minesweeper.model.Cell
 import eu.yeger.minesweeper.model.Game
 import javafx.scene.input.MouseButton
 import javafx.scene.input.MouseEvent
+import javafx.scene.layout.StackPane
 
 object CellController {
 
-    fun initialize(cell: Cell, viewConfig: ViewConfiguration) = with(viewConfig) {
-        stackPane {
-            maxWidth = cellSize
-            maxHeight = cellSize
-            styleClasses("cell")
-            child {
-                if (cell.hasMine) {
-                    imageView(mineIcon) {
-                        fitWidth = cellSize
-                        fitHeight = cellSize
-                        styleClasses("mine")
+    val initialize: (Cell, ViewConfiguration) -> Fragment<StackPane> = { cell, viewConfig ->
+        with(viewConfig) {
+            stackPane {
+                maxWidth = cellSize
+                maxHeight = cellSize
+                styleClasses("cell")
+                child {
+                    if (cell.hasMine) {
+                        imageView(mineIcon, fit = true) {
+                            styleClasses("mine")
+                        }
+                    } else {
+                        label(cell.numberProperty.asString()) {
+                            styleClasses("number", asWord(cell.number))
+                        }
                     }
-                } else {
-                    label(cell.numberProperty.asString()) {
-                        styleClasses("number", asWord(cell.number))
+                }.bindVisible(cell.unveiledProperty)
+                child {
+                    rectangle(cellSize) {
+                        setOnMouseClicked { handleClick(cell, it) }
+                        styleClasses("blocker")
+                        bindVisible(cell.unveiledProperty.not())
                     }
                 }
-            }.bindVisible(cell.unveiledProperty)
-            child {
-                rectangle(cellSize) {
-                    setOnMouseClicked { handleClick(cell, it) }
-                    styleClasses("blocker")
-                    bindVisible(cell.unveiledProperty.not())
-                }
-            }
-            child {
-                imageView(flagIcon) {
-                    bindVisible(cell.flagProperty)
-                    fitWidth = cellSize
-                    fitHeight = cellSize
-                    setOnMouseClicked { event -> handleClick(cell, event) }
-                    styleClasses("flag")
+                child {
+                    imageView(flagIcon, fit = true) {
+                        bindVisible(cell.flagProperty)
+                        setOnMouseClicked { event -> handleClick(cell, event) }
+                        styleClasses("flag")
+                    }
                 }
             }
         }
