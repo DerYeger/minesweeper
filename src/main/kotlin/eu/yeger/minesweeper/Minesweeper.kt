@@ -1,8 +1,6 @@
 package eu.yeger.minesweeper
 
-import eu.yeger.kotlin.javafx.Fragment
-import eu.yeger.kotlin.javafx.child
-import eu.yeger.kotlin.javafx.gridPane
+import eu.yeger.kotlin.javafx.*
 import eu.yeger.minesweeper.controller.CellController
 import eu.yeger.minesweeper.controller.GameController
 import eu.yeger.minesweeper.model.DefaultModelBuilder
@@ -37,14 +35,14 @@ class Minesweeper {
     private val fragmentBuilder: (Game) -> Fragment<Parent> = { game ->
         val viewConfiguration = ViewConfiguration(
                 cellSize,
-                flagIcon.invoke(cellSize),
-                mineIcon.invoke(cellSize)
+                flagIcon(cellSize),
+                mineIcon(cellSize)
         )
 
         gridPane {
             alignment = Pos.CENTER
-            styleClass.add("container")
-            stylesheets.add("/default.css")
+            styleClasses("container")
+            styleSheets("/default.css")
             for (cell in game.cells) {
                 child(cell.x, cell.y) {
                     CellController.initialize(cell, viewConfiguration)
@@ -56,6 +54,6 @@ class Minesweeper {
     fun instance(): Node {
         val game = modelBuilder.build(width, height, mineCount)
         GameController(game, onGameWon, onGameLost)
-        return fragmentBuilder.invoke(game).instance()
+        return fragmentBuilder(game).instance()
     }
 }

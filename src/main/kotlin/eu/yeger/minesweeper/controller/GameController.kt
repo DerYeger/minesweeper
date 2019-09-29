@@ -17,8 +17,8 @@ class GameController(
         game.cells.forEach { this.addCellListener(it) }
         game.stateProperty.addListener { _, _, newValue ->
             when(newValue) {
-                Game.State.WON -> onGameWon.invoke()
-                Game.State.LOST -> onGameLost.invoke()
+                Game.State.WON -> onGameWon()
+                Game.State.LOST -> onGameLost()
                 else -> return@addListener
             }
         }

@@ -9,44 +9,39 @@ import javafx.scene.input.MouseEvent
 
 object CellController {
 
-    fun initialize(cell: Cell, viewConfiguration: ViewConfiguration) = stackPane {
-            maxWidth = viewConfiguration.cellSize
-            maxHeight = viewConfiguration.cellSize
-            styleClass.add("cell")
+    fun initialize(cell: Cell, viewConfig: ViewConfiguration) = with(viewConfig) {
+        stackPane {
+            maxWidth = cellSize
+            maxHeight = cellSize
+            styleClasses("cell")
             child {
-                    if (cell.hasMine) {
-                        imageView {
-                            image = viewConfiguration.mineIcon
-                            fitWidth = viewConfiguration.cellSize
-                            fitHeight = viewConfiguration.cellSize
-                            styleClass.add("mine")
-                            visibleProperty().bindBidirectional(cell.unveiledProperty)
-                        }
-                    } else {
-                        label {
-                            textProperty().bind(cell.numberProperty.asString())
-                            styleClass.addAll("number", asWord(cell.number))
-                            visibleProperty().bindBidirectional(cell.unveiledProperty)
-                        }
+                if (cell.hasMine) {
+                    imageView(mineIcon) {
+                        fitWidth = cellSize
+                        fitHeight = cellSize
+                        styleClasses("mine")
                     }
+                } else {
+                    label(cell.numberProperty.asString()) {
+                        styleClasses("number", asWord(cell.number))
+                    }
+                }
+            }.bindVisible(cell.unveiledProperty)
+            child {
+                rectangle(cellSize) {
+                    setOnMouseClicked { handleClick(cell, it) }
+                    styleClasses("blocker")
+                    bindVisible(cell.unveiledProperty.not())
+                }
             }
-        child {
-            rectangle {
-                width = viewConfiguration.cellSize
-                height = viewConfiguration.cellSize
-                setOnMouseClicked { handleClick(cell, it) }
-                styleClass.add("blocker")
-                visibleProperty().bind(cell.unveiledProperty.not())
-            }
-        }
-        child {
-            imageView {
-                image = viewConfiguration.flagIcon
-                fitWidth = viewConfiguration.cellSize
-                fitHeight = viewConfiguration.cellSize
-                setOnMouseClicked { event -> handleClick(cell, event) }
-                styleClass.add("flag")
-                visibleProperty().bindBidirectional(cell.flagProperty)
+            child {
+                imageView(flagIcon) {
+                    bindVisible(cell.flagProperty)
+                    fitWidth = cellSize
+                    fitHeight = cellSize
+                    setOnMouseClicked { event -> handleClick(cell, event) }
+                    styleClasses("flag")
+                }
             }
         }
     }
@@ -56,7 +51,7 @@ object CellController {
         if (event.button == MouseButton.PRIMARY && !cell.hasFlag) {
             cell.unveiled = true
         } else if (event.button == MouseButton.SECONDARY) {
-            cell.hasFlag = cell.hasFlag.not()
+            cell.flagProperty.flip()
         }
     }
 
@@ -70,6 +65,6 @@ object CellController {
         6 -> "six"
         7 -> "seven"
         8 -> "eight"
-        else -> null
+        else -> "null"
     }
 }
