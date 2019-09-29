@@ -1,13 +1,11 @@
 # Minesweeper 
 
-> A customizable minesweeper implementation using JavaFX.
+> A customizable Minesweeper implementation written in Kotlin and using JavaFX.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://travis-ci.com/DerYeger/minesweeper.svg?token=juB9bV6tFyoA5v7Hx1o4&branch=master)](https://travis-ci.com/DerYeger/minesweeper)
 [![codecov](https://codecov.io/gh/DerYeger/minesweeper/branch/master/graph/badge.svg)](https://codecov.io/gh/DerYeger/minesweeper)
-[![](https://jitpack.io/v/DerYeger/minesweeper.svg)](https://jitpack.io/#DerYeger/minesweeper)
-
-Minesweeper provides an implementation of the classic game with customizable graphics and game settings.
+[![](https://jitpack.io/v/eu.yeger/minesweeper.svg)](https://jitpack.io/#eu.yeger/minesweeper)
 
 ![](pictures/minesweeper.png)
 
@@ -26,41 +24,24 @@ and
 ```
 dependencies {
     ...
-    implementation 'com.github.deryeger:minesweeper:0.3'
+    implementation 'eu.yeger:minesweeper:0.4'
 }
 ```
 
 ## Usage
 
-With the builder you can quickly create Minesweeper configurations, which in return provide game instances in form of Node objects.
 ```
-Minesweeper minesweeper = Minesweeper
-                .builder()
-                .width(20)
-                .height(10)
-                .mineCount(40)
-                .cellSize(30)
-                .onGameWon(() -> someMethod())
-                .onGameLost(() -> someOtherMethod())
-                .build();
+val minesweeper = Minesweeper().apply {
+    width = 9
+    height = 9
+    mineCount = 15
+    cellSize = 30.0
+    onGameWon = { ... }
+    onGameLost = { ... }
+}
 
-Node view = minesweeper.instance();
+val view = minesweeper.instance();
 ```
-
-## Release History
-
-- 0.3
-    - Added style classes to numbers
-    - Added flag and mine icons
-    - Icons are now passed as Images to the builder
-    - The builder does no longer supports setting styles
-        - Styles can be applied to the output Node instead
-- 0.2
-    - Removed unnecessary getter and setter methods
-    - Removed example
-    - Improved code quality
-- 0.1
-    - WIP Alpha Release
 
 ## Licenses
 
