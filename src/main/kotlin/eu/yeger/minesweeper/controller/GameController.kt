@@ -16,7 +16,7 @@ class GameController(
     private fun addListeners() {
         game.cells.forEach { this.addCellListener(it) }
         game.stateProperty.addListener { _, _, newValue ->
-            when(newValue) {
+            when (newValue) {
                 Game.State.WON -> onGameWon()
                 Game.State.LOST -> onGameLost()
                 else -> return@addListener
@@ -47,5 +47,5 @@ class GameController(
     }
 
     private fun gameWon() =
-            game.cells.all { it.hasMine xor it.unveiled}
+            game.cells.all { it.hasMine xor it.unveiled }
 }

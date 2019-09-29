@@ -45,7 +45,7 @@ class Minesweeper {
             styleSheets("/default.css")
             for (cell in game.cells) {
                 child(cell.x, cell.y) {
-                    CellController.initialize(cell, viewConfiguration)
+                    CellController.initializer(cell, viewConfiguration)
                 }
             }
         }

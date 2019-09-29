@@ -10,7 +10,7 @@ import javafx.scene.layout.StackPane
 
 object CellController {
 
-    val initialize: (Cell, ViewConfiguration) -> Fragment<StackPane> = { cell, viewConfig ->
+    val initializer: (Cell, ViewConfiguration) -> Fragment<StackPane> = { cell, viewConfig ->
         with(viewConfig) {
             stackPane {
                 maxWidth = cellSize
@@ -54,7 +54,7 @@ object CellController {
         }
     }
 
-    private fun asWord(number: Int) = when(number) {
+    private fun asWord(number: Int) = when (number) {
         0 -> "zero"
         1 -> "one"
         2 -> "two"

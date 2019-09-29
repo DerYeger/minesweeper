@@ -15,7 +15,7 @@ object DefaultModelBuilder : ModelBuilder {
     private fun initCells(game: Game) {
         val cellMap = HashMap<Pair<Int, Int>, Cell>()
         Array(game.height) { y ->
-            Array(game.width) {x ->
+            Array(game.width) { x ->
                 Cell(game, x, y).apply {
                     withNeighbors(fromMap(cellMap, x, y))
                     cellMap[x to y] = this
@@ -29,9 +29,9 @@ object DefaultModelBuilder : ModelBuilder {
             x: Int,
             y: Int
     ) = listOfNotNull(
-            cellMap[x - 1 to y    ], //left
+            cellMap[x - 1 to y], //left
             cellMap[x - 1 to y - 1], //top-left
-            cellMap[x     to y - 1], //top
+            cellMap[x to y - 1], //top
             cellMap[x + 1 to y - 1]  //top-right
     )
 

@@ -43,13 +43,13 @@ class IntegrationTests : ApplicationTest() {
         WaitForAsyncUtils.waitForFxEvents()
     }
 
-    private fun testGameAlphaBuilder() = object: ModelBuilder {
+    private fun testGameAlphaBuilder() = object : ModelBuilder {
         override fun build(width: Int, height: Int, mineCount: Int): Game {
             val game = Game(2, 2)
-            val tl = Cell(game,0, 0)
-            val tr = Cell(game,1, 0)
-            val bl = Cell(game,0, 1)
-            val br = Cell(game,1, 1)
+            val tl = Cell(game, 0, 0)
+            val tr = Cell(game, 1, 0)
+            val bl = Cell(game, 0, 1)
+            val br = Cell(game, 1, 1)
             tl.withNeighbors(listOf(tr, bl, br))
             br.hasMine = true
 
@@ -57,13 +57,13 @@ class IntegrationTests : ApplicationTest() {
         }
     }
 
-    private fun testGameBetaBuilder() = object: ModelBuilder {
+    private fun testGameBetaBuilder() = object : ModelBuilder {
         override fun build(width: Int, height: Int, mineCount: Int): Game {
             val game = Game(2, 2)
-            val tl = Cell(game,0, 0)
-            val tr = Cell(game,1, 0)
-            val bl = Cell(game,0, 1)
-            val br = Cell(game,1, 1)
+            val tl = Cell(game, 0, 0)
+            val tr = Cell(game, 1, 0)
+            val bl = Cell(game, 0, 1)
+            val br = Cell(game, 1, 1)
             game.cells.forEach { it.number = 1 }
             tl.withNeighbors(listOf(tr, bl, br))
             br.hasMine = true
@@ -72,7 +72,7 @@ class IntegrationTests : ApplicationTest() {
         }
     }
 
-    private fun testGameGammaBuilder() = object: ModelBuilder {
+    private fun testGameGammaBuilder() = object : ModelBuilder {
         override fun build(width: Int, height: Int, mineCount: Int): Game {
             val game = Game(10, 1)
             for (i in 0..9) {
