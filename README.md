@@ -24,7 +24,7 @@ and
 ```
 dependencies {
     ...
-    implementation 'eu.yeger:minesweeper:0.4'
+    implementation 'eu.yeger:minesweeper:{version}'
 }
 ```
 
