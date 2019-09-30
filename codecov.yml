@@ -8,3 +8,8 @@ coverage:
         target: 80
         threshold: null
         base: auto
+    patch:
+      default:
+        target: 80
+        threshold: null
+        base: auto
