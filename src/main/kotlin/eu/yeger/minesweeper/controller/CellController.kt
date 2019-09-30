@@ -10,36 +10,34 @@ import javafx.scene.layout.StackPane
 
 object CellController {
 
-    val initializer: (Cell, ViewConfiguration) -> Fragment<StackPane> = { cell, viewConfig ->
-        with(viewConfig) {
-            stackPane {
-                maxWidth = cellSize
-                maxHeight = cellSize
-                styleClasses("cell")
-                child {
-                    if (cell.hasMine) {
-                        imageView(mineIcon, fit = true) {
-                            styleClasses("mine")
-                        }
-                    } else {
-                        label(cell.numberProperty.asString()) {
-                            styleClasses("number", asWord(cell.number))
-                        }
+    fun initialize(cell: Cell, viewConfig: ViewConfiguration) = with(viewConfig) {
+        stackPane {
+            maxWidth = cellSize
+            maxHeight = cellSize
+            styleClasses("cell")
+            child {
+                if (cell.hasMine) {
+                    imageView(mineIcon, fit = true) {
+                        styleClasses("mine")
                     }
-                }.bindVisible(cell.unveiledProperty)
-                child {
-                    rectangle(cellSize) {
-                        setOnMouseClicked { handleClick(cell, it) }
-                        styleClasses("blocker")
-                        bindVisible(cell.unveiledProperty.not())
+                } else {
+                    label(cell.numberProperty.asString()) {
+                        styleClasses("number", asWord(cell.number))
                     }
                 }
-                child {
-                    imageView(flagIcon, fit = true) {
-                        bindVisible(cell.flagProperty)
-                        setOnMouseClicked { event -> handleClick(cell, event) }
-                        styleClasses("flag")
-                    }
+            }.bindVisible(cell.unveiledProperty)
+            child {
+                rectangle(cellSize) {
+                    setOnMouseClicked { handleClick(cell, it) }
+                    styleClasses("blocker")
+                    bindVisible(cell.unveiledProperty.not())
+                }
+            }
+            child {
+                imageView(flagIcon, fit = true) {
+                    bindVisible(cell.flagProperty)
+                    setOnMouseClicked { event -> handleClick(cell, event) }
+                    styleClasses("flag")
                 }
             }
         }
