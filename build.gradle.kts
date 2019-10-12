@@ -8,6 +8,7 @@ val testFXVersion = "4.0.16-alpha"
 plugins {
     java
     jacoco
+    maven
     id("org.openjfx.javafxplugin") version "0.0.7"
     kotlin("jvm") version "1.3.50"
 }
