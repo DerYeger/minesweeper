@@ -1,23 +1,21 @@
-plugins {
-    java
-    jacoco
-    id("org.openjfx.javafxplugin") version "0.0.7"
-    id("org.jetbrains.kotlin.jvm") version "1.3.50"
-}
+group = "eu.yeger"
+version = "0.6.0"
 
 val javaVersion = JavaVersion.VERSION_12
 val jUnitVersion = "5.5.2"
 val testFXVersion = "4.0.16-alpha"
 
-group = "eu.yeger"
-version = "0.6.0"
+plugins {
+    java
+    jacoco
+    id("org.openjfx.javafxplugin") version "0.0.7"
+    kotlin("jvm") version "1.3.50"
+}
 
 java {
     sourceCompatibility = javaVersion
     targetCompatibility = javaVersion
 }
-
-
 
 javafx {
     version = javaVersion.toString()
@@ -32,7 +30,7 @@ repositories {
 
 dependencies {
     implementation(kotlin("stdlib"))
-    implementation("eu.yeger:kotlin.javafx:0.1.2")
+    implementation("eu.yeger:kofx:0.3.0")
 
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$jUnitVersion")
     testImplementation("org.junit.jupiter:junit-jupiter-api:$jUnitVersion")

@@ -1,12 +1,14 @@
 package eu.yeger.minesweeper.controller
 
-import eu.yeger.kotlin.javafx.*
+import eu.yeger.kofx.extension.bindVisible
+import eu.yeger.kofx.extension.styleClasses
+import eu.yeger.kofx.fragment.*
+import eu.yeger.kofx.property.flip
 import eu.yeger.minesweeper.ViewConfiguration
 import eu.yeger.minesweeper.model.Cell
 import eu.yeger.minesweeper.model.Game
 import javafx.scene.input.MouseButton
 import javafx.scene.input.MouseEvent
-import javafx.scene.layout.StackPane
 
 object CellController {
 

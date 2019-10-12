@@ -1,6 +1,10 @@
 package eu.yeger.minesweeper
 
-import eu.yeger.kotlin.javafx.*
+import eu.yeger.kofx.extension.styleClasses
+import eu.yeger.kofx.extension.styleSheets
+import eu.yeger.kofx.fragment.Fragment
+import eu.yeger.kofx.fragment.child
+import eu.yeger.kofx.fragment.gridPane
 import eu.yeger.minesweeper.controller.CellController
 import eu.yeger.minesweeper.controller.GameController
 import eu.yeger.minesweeper.model.DefaultModelBuilder

@@ -1,25 +1,24 @@
 package eu.yeger.minesweeper.model
 
-import eu.yeger.kotlin.javafx.*
-import javafx.beans.property.SimpleBooleanProperty
-import javafx.beans.property.SimpleIntegerProperty
+import eu.yeger.kofx.property.booleanProperty
+import eu.yeger.kofx.property.integerProperty
 
 class Cell(
         val game: Game,
         val x: Int,
         val y: Int
 ) {
-    val mineProperty = SimpleBooleanProperty(false)
-    var hasMine by mineProperty.delegation()
+    val mineProperty = booleanProperty(false)
+    var hasMine by mineProperty
 
-    val flagProperty = SimpleBooleanProperty(false)
-    var hasFlag by flagProperty.delegation()
+    val flagProperty = booleanProperty(false)
+    var hasFlag by flagProperty
 
-    val unveiledProperty = SimpleBooleanProperty(false)
-    var unveiled by unveiledProperty.delegation()
+    val unveiledProperty = booleanProperty(false)
+    var unveiled by unveiledProperty
 
-    val numberProperty = SimpleIntegerProperty(0)
-    var number by numberProperty.delegation()
+    val numberProperty = integerProperty(0)
+    var number by numberProperty
 
     val neighbors = ArrayList<Cell>()
 
