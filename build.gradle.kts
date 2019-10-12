@@ -1,5 +1,5 @@
 group = "eu.yeger"
-version = "0.6.0"
+version = "0.6.1"
 
 val javaVersion = JavaVersion.VERSION_12
 val jUnitVersion = "5.5.2"
